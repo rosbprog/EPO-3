@@ -6,7 +6,7 @@ entity controls is
 		reset			: in	std_logic;
 
 		move_in			: in	std_logic_vector(3 downto 0);
-		move_out		: out	std_logic_vector(2 downto 0));
+		move_out		: out	std_logic_vector(3 downto 0));
 end entity controls;
 
 architecture behavioural of controls is
