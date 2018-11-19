@@ -28,7 +28,7 @@ begin
 	begin
 		case state is
 			when start_s =>
-				move_out <= "000";
+				move_out <= "0000";
 				if (move_in = "0001") then
 					new_state <= right_s;
 				elsif (move_in = "0010") then
@@ -42,7 +42,7 @@ begin
 				end if; 
 
 			when right_s =>
-				move_out <= "001";
+				move_out <= "0001";
 				if (move_in = "0010") then
 					new_state <= up_s;
 				elsif (move_in = "0100") then
@@ -54,7 +54,7 @@ begin
 				end if; 
 
 			when up_s =>
-				move_out <= "010";
+				move_out <= "0010";
 				if (move_in = "0001") then
 					new_state <= right_s;
 				elsif (move_in = "0100") then
@@ -66,7 +66,7 @@ begin
 				end if; 
 	
 			when left_s =>
-				move_out <= "011";
+				move_out <= "0100";
 				if (move_in = "0001") then
 					new_state <= right_s;
 				elsif (move_in = "0010") then
@@ -78,7 +78,7 @@ begin
 				end if; 
 					 
 			when down_s =>
-				move_out <= "100";
+				move_out <= "1000";
 				if (move_in = "0001") then
 					new_state <= right_s;
 				elsif (move_in = "0010") then
