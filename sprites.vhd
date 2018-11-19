@@ -18,7 +18,7 @@ begin
 		begin
 			if(sprite_select = "000") then  --coin
 				color_out <= "111";				--white
-				if(y_pos = "101" OR y_pos = "010) then		-- row 3 and 6
+				if(y_pos = "101" OR y_pos = "010") then		-- row 3 and 6
 					row_out <= "00011000";
 				elsif(y_pos = "100" OR y_pos = "011") then	-- row 4 and 5
 					row_out <= "00111100";
@@ -29,7 +29,7 @@ begin
 			elsif(sprite_select = "001") then  --ghost red
 				color_out <= "100";						-- red
 				if(y_pos = "101" OR y_pos = "011" OR y_pos = "010") then	-- rows 3,5,6
-					row_out <= "01111110"
+					row_out <= "01111110";
 				elsif(y_pos = "100" OR y_pos = "001") then 			-- rows 4 and 7
 				   	row_out <= "01011010";
 				elsif(y_pos = "110") then					-- row 2
@@ -41,7 +41,7 @@ begin
 			elsif(sprite_select = "010") then  --ghost green
 				color_out <= "010";						-- green
 				if(y_pos = "101" OR y_pos = "011" OR y_pos = "010") then	-- rows 3,5,6
-					row_out <= "01111110"
+					row_out <= "01111110";
 				elsif(y_pos = "100" OR y_pos = "001") then 			-- rows 4 and 7
 				   	row_out <= "01011010";
 				elsif(y_pos = "110") then					-- row 2
@@ -62,15 +62,15 @@ begin
 					row_out <= "01111110";
 				else						--row 1 and 8
 				   row_out <= "00000000"; 
+				end if;
+					
 			elsif(sprite_select = "100") then  --wall
 				color_out <= "001";				-- blue	
 				row_out <= "11111111";				-- all rows
-				end if; 
 
 			else  				--open
 				color_out <= "000";				-- black	
 				row_out <= "11111111";				-- all rows
-				end if; 
 			end if; 
 	end process;
 end architecture behavioural;
