@@ -62,7 +62,7 @@ if(clk'event and clk = '1') then
 end if;
 end process;
 
-lb12: process(sync, cell_type, sprite_colour, pixel_array, new_state)
+lb12: process(sync, cell_type, sprite_colour, pixel_array, state)
 begin
 case state is
 	when reset_state  =>
@@ -89,7 +89,6 @@ case state is
 		done4 <= '0';
 		done7 <= '1';
 		dual_pixel_x<='0';
-		dual_pixel_y<='0';
 
 		colour<="000";
 
@@ -116,19 +115,12 @@ case state is
 		ycoordinates <= std_logic_vector(to_unsigned(current_block_vertical,5));
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
-		if dual_pixel_x = '1' then
-			new_state <= pixel_1;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_0;
-			dual_pixel_x<='1'; 
-		end if; 
+		new_state<=pixel_1;
 	when pixel_1 =>		
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '0';
-		current_block_horizontal <= current_block_horizontal + 1;
 
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(1));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(1));
@@ -139,13 +131,6 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		new_state<=pixel_2;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_2;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_1;
-			dual_pixel_x<='1'; 
-		end if; 
 	when pixel_2 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -161,13 +146,6 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		new_state<=pixel_3;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_3;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_2;
-			dual_pixel_x<='1'; 
-		end if; 
 	when pixel_3 =>	
 		waiting<='0';
 		done0 <= '0';
@@ -183,13 +161,6 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		new_state<=pixel_4;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_4;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_3;
-			dual_pixel_x<='1'; 
-		end if; 
 	when pixel_4 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -204,14 +175,7 @@ case state is
 		ycoordinates <= std_logic_vector(to_unsigned(current_block_vertical,5));
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
-		new_state<=pixel_5;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_5;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_4;
-			dual_pixel_x<='1'; 
-		end if; 
+		new_state<=pixel_5; 
 	when pixel_5 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -226,14 +190,7 @@ case state is
 		ycoordinates <= std_logic_vector(to_unsigned(current_block_vertical,5));
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
-		new_state<=pixel_6;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_6;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_5;
-			dual_pixel_x<='1'; 
-		end if; 
+		new_state<=pixel_6; 
 	when pixel_6 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -248,14 +205,7 @@ case state is
 		ycoordinates <= std_logic_vector(to_unsigned(current_block_vertical,5));
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
-		new_state<=pixel_7;
-		if dual_pixel_x = '1' then
-			new_state <= pixel_7;
-			dual_pixel_x<='0';
-		else 
-			new_state<= pixel_6;
-			dual_pixel_x<='1'; 
-		end if; 
+		new_state<=pixel_7; 
 	when pixel_7 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -270,13 +220,13 @@ case state is
 		ycoordinates <= std_logic_vector(to_unsigned(current_block_vertical,5));
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
-		if dual_pixel_x = '1' then
-			if current_block_horizontal = 24 then
+
+			if current_block_horizontal = 23 then
 				current_block_horizontal <= 0;
 				new_state<=wait_state;
 				if county = 7 AND dual_pixel_y='1' then
 					county <= 0;
-					if current_block_vertical = 24 then
+					if current_block_vertical = 23 then
 						current_block_vertical <= 0;
 					else
 						current_block_vertical <= current_block_vertical + 1;
@@ -284,6 +234,7 @@ case state is
 				else 
 					if dual_pixel_y = '1' then
 						county <= county +1;
+						dual_pixel_y<='0';
 					else 
 						dual_pixel_y<='1';
 					end if;
@@ -292,10 +243,7 @@ case state is
 				current_block_horizontal <= current_block_horizontal + 1;
 				new_state<= pixel_0;
 			end if;
-		else
-			dual_pixel_x<='1';
-			new_state<= pixel_7;
-		end if;
+
 	end case;
 end process;		
 			
