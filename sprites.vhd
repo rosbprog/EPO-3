@@ -20,7 +20,7 @@ begin
 				color_out <= "111";				--white
 				if(y_pos = "010" OR y_pos = "101") then		-- row 3 and 6
 					row_out <= "00011000";
-				elsif(y_pos = "011" OR y_pos = "101") then	-- row 4 and 5
+				elsif(y_pos = "011" OR y_pos = "100") then	-- row 4 and 5
 					row_out <= "00111100";
 				else						-- rows 1,2,7,8
 					row_out <= "00000000";
