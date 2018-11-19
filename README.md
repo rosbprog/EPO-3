@@ -1,5 +1,5 @@
 # EPO-3
-TU Delft - EE2L11 - EPO-3 - Pacman
+TU Delft - EE2L11 - EPO-3 - Pac-Man
 
 Project members:
   - Roy Bakker
