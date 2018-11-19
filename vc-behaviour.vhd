@@ -36,7 +36,7 @@ end process;
 
 col_buf: process(clk, pixel_array(7 downto 0))
 begin
-if(clk'event and clk = '1') then
+if(clk'event  and clk = '1') then
 	if done7 = '1' then 
 		colour_buffer<=sprite_colour;
 	else
@@ -51,7 +51,7 @@ end process;
 --At pixel 0, the final four bits are loaded, at pixel 5 the first four bits are loaded. 
 --At pixel 8 the new colours are loaded into the buffer
 
-ib11: process(clk)
+ib11: process(clk, reset)
 begin
 if(clk'event and clk = '1') then
 	if reset = '1' then
@@ -62,7 +62,7 @@ if(clk'event and clk = '1') then
 end if;
 end process;
 
-lb12: process(sync, cell_type, sprite_colour, pixel_array)
+lb12: process(sync, cell_type, sprite_colour, pixel_array, new_state)
 begin
 case state is
 	when reset_state  =>
@@ -98,7 +98,7 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		if sync='1' then
-			new_state <= pixel_1;
+			new_state <= pixel_0;
 		else
 			new_state<=wait_state;
 		end if;
@@ -117,10 +117,10 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		if dual_pixel_x = '1' then
-			new_state <= pixel_2;
+			new_state <= pixel_1;
 			dual_pixel_x<='0';
 		else 
-			new_state<= pixel_1;
+			new_state<= pixel_0;
 			dual_pixel_x<='1'; 
 		end if; 
 	when pixel_1 =>		
@@ -140,10 +140,10 @@ case state is
 		y_pos <= std_logic_vector(to_unsigned(county,3));
 		new_state<=pixel_2;
 		if dual_pixel_x = '1' then
-			new_state <= pixel_3;
+			new_state <= pixel_2;
 			dual_pixel_x<='0';
 		else 
-			new_state<= pixel_2;
+			new_state<= pixel_1;
 			dual_pixel_x<='1'; 
 		end if; 
 	when pixel_2 =>		
