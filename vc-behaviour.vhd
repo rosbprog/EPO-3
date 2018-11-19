@@ -47,7 +47,7 @@ else
 end if;
 end process;
 
---process using if statements for the x count, thus keeping track of which pixel inside the 8-wide array should be drawn. 
+--process using case statements for the x count, thus keeping track of which pixel inside the 8-wide array should be drawn. 
 --At pixel 0, the final four bits are loaded, at pixel 5 the first four bits are loaded. 
 --At pixel 8 the new colours are loaded into the buffer
 
@@ -62,7 +62,7 @@ if(clk'event and clk = '1') then
 end if;
 end process;
 
-lb12: process(reset, sync, cell_type, sprite_colour, pixel_array)
+lb12: process(sync, cell_type, sprite_colour, pixel_array)
 begin
 case state is
 	when reset_state  =>
