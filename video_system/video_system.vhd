@@ -31,7 +31,7 @@ component vga_controll is
         v_sync       : out std_logic);
 end vga_controll;
 
-component vc is
+component video_control is
    port(clk          : in  std_logic;
         reset        : in  std_logic;
         sync         : in  std_logic;
@@ -63,7 +63,7 @@ signal xcoordinates, ycoordinates: std_logic_vector(4 downto 0);
 
 begin
 
-vidcontrol: vc port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates);
+vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates);
 sprites: sprite port map(y_pos, sprite_type, sprite_colour, pixel_array);
 vgacontrol: vga_controll port map(clk, reset, colour, sync, red, green, blue, h_sync, v_sync);
 
