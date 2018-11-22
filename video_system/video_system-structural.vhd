@@ -82,11 +82,23 @@ end component;
 signal y_pos,sprite_type, colour, sprite_colour: std_logic_vector(2 downto 0);
 signal sync: std_logic;
 signal pixel_array: std_logic_vector(7 downto 0);
+signal	county:  std_logic_vector(2 downto 0);
+signal	dual_pixel_y: std_logic;
+signal	current_block_horizontal: std_logic_vector(4 downto 0);
+signal	current_block_vertical :  std_logic_vector(4 downto 0);
+signal	reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
+	en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y: std_logic;	
 
 begin
 
-vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates);
+vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates,
+				  county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
+				  reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
+				  en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 sprites: sprite port map(y_pos, sprite_type, sprite_colour, pixel_array);
 vgacontrol: vga_controll port map(clk, reset, colour, sync, red, green, blue, h_sync, v_sync);
+cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
+			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
+			 en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 
 end architecture structural;
