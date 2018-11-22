@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 use IEEE.numeric_std.ALL;
 
-architecture behaviour of vc is
+architecture behaviour of video_control is
 signal county, current_block_horizontal, current_block_vertical : INTEGER;
 signal waiting, done0, done4, done7, dual_pixel_y: std_logic;
 signal pixel_arr_buffer: std_logic_vector(7 downto 0);
