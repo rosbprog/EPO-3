@@ -234,6 +234,11 @@ case state is
 		done4 <= '0';
 		done7 <= '0';		
 
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(6));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(6));
 		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(6));
