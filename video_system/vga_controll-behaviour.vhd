@@ -7,7 +7,7 @@ signal hcount, vcount : std_logic_vector(9 downto 0);
 
 begin
 
-L1:		process(clk, reset)
+L1:		process(clk, reset,hcount)
 		begin
 		if (rising_edge(clk)) then
 			if (reset = '1') then
@@ -23,7 +23,7 @@ L1:		process(clk, reset)
 		end if;
  		end process;
 
-L2:		process (clk, reset)
+L2:		process (clk, reset, vcount)
 		begin
 		if (rising_edge(clk)) then
 			if (reset = '1') then
@@ -89,9 +89,9 @@ L5:		process(clk, reset)
 			green <= '0';
 			blue <= '0';
 			elsif(display_on = '1') then
-			red <= rgb(0);
+			red <= rgb(2);
 			green <= rgb(1);
-			blue <= rgb(2);
+			blue <= rgb(0);
 			else
 			red <= '0';
 			green <= '0';
