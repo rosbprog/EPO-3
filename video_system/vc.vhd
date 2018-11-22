@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.ALL;
 
 
 
-entity vc is
+entity video_control is
    port(clk          : in  std_logic;
         reset        : in  std_logic;
         sync         : in  std_logic;
