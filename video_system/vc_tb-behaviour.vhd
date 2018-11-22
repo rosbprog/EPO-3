@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.ALL;
 
 architecture behaviour of vc_tb is
-   component vc
+   component video_control
       port(clk          : in  std_logic;
            reset        : in  std_logic;
            sync         : in  std_logic;
@@ -27,7 +27,7 @@ architecture behaviour of vc_tb is
    signal xcoordinates : std_logic_vector(4 downto 0);
    signal ycoordinates : std_logic_vector(4 downto 0);
 begin
-test: vc port map (clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates);
+test: video_control port map (clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates);
   clk <=  '1' after 0 ns,
           '0' after 40 ns when clk /= '0' else '1' after 40 ns;
    reset <= '1' after 0 ns,
