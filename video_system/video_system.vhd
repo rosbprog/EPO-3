@@ -43,7 +43,7 @@ component video_control is
         colour       : out std_logic_vector(2 downto 0);
         xcoordinates : out std_logic_vector(4 downto 0);
 				ycoordinates : out std_logic_vector(4 downto 0));
-end vc;
+end video_control;
 
 component sprite is
 	port(  	y_pos		:in std_logic_vector (2 downto 0); 
