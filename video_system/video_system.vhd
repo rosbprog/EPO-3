@@ -6,7 +6,7 @@ use ieee.std_logic_unsigned.all;
 entity video_system is 
   port( clk       : in std_logic;
         reset     : in std_logic;
-        cell_type : in std_logic;
+        cell_type : in std_logic_vector(2 downto 0);
         xcoordinates : out std_logic_vector(4 downto 0);
         ycoordinates : out std_logic_vector(4 downto 0);
         red       : out std_logic;
