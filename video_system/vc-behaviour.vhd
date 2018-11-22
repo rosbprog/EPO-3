@@ -4,7 +4,7 @@ use IEEE.numeric_std.ALL;
 
 architecture behaviour of vc is
 signal county, current_block_horizontal, current_block_vertical : INTEGER;
-signal waiting, done0, done4, done7, dual_pixel_x, dual_pixel_y: std_logic;
+signal waiting, done0, done4, done7, dual_pixel_y: std_logic;
 signal pixel_arr_buffer: std_logic_vector(7 downto 0);
 signal colour_buffer: std_logic_vector(2 downto 0);
 type vc_state is(reset_state, wait_state, pixel_0,pixel_1,pixel_2,pixel_3,pixel_4,pixel_5,pixel_6,pixel_7);
@@ -73,7 +73,6 @@ case state is
 		county <= 0;
 		current_block_horizontal <= 0;
 		current_block_vertical <= 0;
-		dual_pixel_x<='0';
 		dual_pixel_y<='0';
 
 		colour<="000";
@@ -88,7 +87,11 @@ case state is
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '1';
-		dual_pixel_x<='0';
+
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
 
 		colour<="000";
 
@@ -107,6 +110,11 @@ case state is
 		done4 <= '0';
 		done7 <= '0';
 
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(0));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(0));
 		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(0));
@@ -121,6 +129,12 @@ case state is
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '0';
+
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
 
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(1));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(1));
@@ -137,6 +151,12 @@ case state is
 		done4 <= '0';
 		done7 <= '0';
 
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
+
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(2));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(2));
 		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(2));
@@ -151,6 +171,11 @@ case state is
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '0';
+
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
 
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(3));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(3));
@@ -167,6 +192,12 @@ case state is
 		done4 <= '1';
 		done7 <= '0';
 
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
+
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(4));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(4));
 		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(4));
@@ -181,6 +212,12 @@ case state is
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '0';		
+
+		county <= county;
+		current_block_horizontal <= current_block_horizontal;
+		current_block_vertical <= current_block_vertical;
+		dual_pixel_y<=dual_pixel_y;
+
 
 		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(5));
 		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(5));
@@ -237,11 +274,14 @@ case state is
 						dual_pixel_y<='0';
 					else 
 						dual_pixel_y<='1';
+						county<=county;
 					end if;
 				end if;
 			else
 				current_block_horizontal <= current_block_horizontal + 1;
 				new_state<= pixel_0;
+				current_block_vertical<=current_block_vertical;
+				county<=county;
 			end if;
 
 	end case;
