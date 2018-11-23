@@ -15,7 +15,8 @@ component vga_controll is
         green        : out std_logic;
         blue         : out std_logic;
         h_sync       : out std_logic;
-        v_sync       : out std_logic);
+        v_sync       : out std_logic;
+	calc_start	  : out std_logic);
 end component vga_controll;
 
 component video_control is
@@ -96,7 +97,7 @@ vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, p
 				  reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 				  en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 sprites: sprite port map(y_pos, sprite_type, sprite_colour, pixel_array);
-vgacontrol: vga_controll port map(clk, reset, colour, sync, red, green, blue, h_sync, v_sync);
+vgacontrol: vga_controll port map(clk, reset, colour, sync, red, green, blue, h_sync, v_sync, calc_start);
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 			 en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);

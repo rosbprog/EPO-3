@@ -13,7 +13,8 @@ entity video_system is
         green     : out std_logic;
         blue      : out std_logic;
         h_sync    : out std_logic;
-        v_sync    : out std_logic);
+        v_sync    : out std_logic;
+	calc_start	: out std_logic);
 end video_system;
 
 

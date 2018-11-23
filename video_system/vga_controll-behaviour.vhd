@@ -1,45 +1,45 @@
-library IEEE;
-use IEEE.std_logic_1164.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
 
 architecture vga_behavioral of vga_controll is
 signal display_on : std_logic;
-signal hcount, vcount : std_logic_vector(9 downto 0);
+signal hcount, new_hcount, vcount, new_vcount: std_logic_vector(9 downto 0);
 
 begin
 
-L1:		process(clk, reset,hcount)
+L1:		process(clk, reset)						--
 		begin
 		if (rising_edge(clk)) then
 			if (reset = '1') then
 			hcount <= (others =>'0');
-
-			elsif(hcount=399) then 
-			hcount <= (others => '0');
+			vcount<= (others =>'0');
 			else 
-			hcount <= hcount + 1;
+			hcount <= new_hcount;
+			vcount<= new_vcount;
 			end if;
-		else  
-		hcount <= hcount;
 		end if;
  		end process;
 
-L2:		process (clk, reset, vcount)
+L11:		process(hcount)
 		begin
-		if (rising_edge(clk)) then
-			if (reset = '1') then
-			vcount<= (others =>'0');
-
-			elsif(hcount=350) then 
-				if (vcount = 524) then 
-				vcount <= (others => '0');
- 				else vcount <= vcount + 1;
-				end if;
-			else 
-			vcount <= vcount;
+			if(hcount=399) then 
+			new_hcount <= (others => '0');
+			else
+			new_hcount <= hcount + 1;
 			end if;
-		else 
-		vcount <= vcount;
-		end if;
+		end process;
+
+L12:		process (vcount)
+		begin
+			if(hcount=350) then 
+				if (vcount = 524) then 
+				new_vcount <= (others => '0');
+ 				else 
+				new_vcount <= vcount + 1;
+				end if;
+			end if;
 		end process;
 		
 L3:		process( clk, reset)
@@ -64,10 +64,15 @@ L3:		process( clk, reset)
 			else
 				pixel_sync <= '0';
 			end if;
+			if (vcount = 479) then
+				calc_start <= '1';
+			else 
+				calc_start <= '0';
+			end if;  
 		end if;
 		end process;
 
-L4:		process(clk,hcount,vcount)
+L4:		process(clk,reset)
 		begin
 		if (rising_edge(clk)) then
 			if (reset = '1') then 
