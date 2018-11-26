@@ -8,7 +8,7 @@ entity vga_controll is
         reset        : in  std_logic;
         rgb          : in  std_logic_vector(2 downto 0);
         pixel_sync		 : out std_logic;
-	pixel_sync_score : out std_logic;
+	 pixel_sync_score : out std_logic;
         red          : out std_logic;
         green        : out std_logic;
         blue         : out std_logic;
