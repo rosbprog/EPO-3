@@ -26,31 +26,31 @@ end process;
 L2: process(plus)
 begin
 	if (plus='1') then
-		if (in_a<"1111" and supp_a='0') then
+		if (in_a<"1001" and supp_a='0') then
 			new_a<=in_a+1;
 			new_b<=in_b;
 			new_c<=in_c;
 			supp_a<='0';
 			supp_b<='0';
-		elsif (in_a="1111" and supp_a='0') then
+		elsif (in_a="1001" and supp_a='0') then
 			new_a<="0000";
 			new_b<=in_b+1;
 			new_c<=in_c;
 			supp_a<='1';
 			supp_b<='0';
-		elsif (in_b<"1111" and supp_b='0') then
+		elsif (in_b<"1001" and supp_b='0') then
 			new_a<=in_a;
 			new_b<=in_b+1;
 			new_c<=in_c;
 			supp_a<='0';
 			supp_b<='0';
-		elsif (in_b="1111" and supp_b='0') then
+		elsif (in_b="1001" and supp_b='0') then
 			new_a<=in_a;
 			new_b<="0000";
 			new_c<=in_c;
 			supp_a<='0';
 			supp_b<='1';
-		elsif (in_c<"1111" and supp_a='1' and supp_b='1') then
+		elsif (in_c<"1001" and supp_a='1' and supp_b='1') then
 			new_a<=in_a;
 			new_b<=in_b;
 			new_c<=in_c+1;
