@@ -12,6 +12,7 @@ entity score_control is
 	county					: in std_logic_vector(2 downto 0);
 	current_block_horizontal 					: in std_logic_vector(4 downto 0);
 
+	colour					: out std_logic_vector(2 downto 0);
         score_sprite_type   						: out std_logic_vector(3 downto 0);
 	score_y_pos	      				: out std_logic_vector(2 downto 0);
 	
@@ -21,7 +22,7 @@ entity score_control is
 
 	en_county					: out std_logic;
 	en_current_block_horizontal					: out std_logic;
-	en_dual_pixel_y					: out std_logic_vector(2 downto 0)
+	en_dual_pixel_y					: out std_logic
 	);
 	
 end score_control;
