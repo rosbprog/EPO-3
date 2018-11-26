@@ -53,6 +53,11 @@ L3:		process( hcount, vcount)
 			else 
 				v_sync <= '1';
 			end if;
+			if(hcount=40 and (vcount >= 32 and vcount<=47)) then
+				score_pixel_sync <= '1';
+			else
+				score_pixel_sync <= '0';
+			end if;
 			if(hcount=40 and (vcount >= 48 and vcount<=431)) then
 				pixel_sync <= '1';
 			else
