@@ -44,9 +44,9 @@ begin
 				if(y_pos = "001" OR y_pos = "110") then 								-- row 2 and 7
 					row_out <= "00111100";		
 				elsif(y_pos = "010") then								--row 3
-					row_out <= "01110110";
+					row_out <= "01101110";
 				elsif(y_pos = "100") then								--row 5
-					row_out <= "01111000";
+					row_out <= "00011110";
 				elsif(y_pos = "011" OR y_pos = "101") then								--row 4 and 6
 					row_out <= "01111110";
 				else								--row 1 and 8

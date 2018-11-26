@@ -30,7 +30,7 @@ begin
 	end if;
 end process;
 
-newarray_buffer: process(pixel_arr_buffer, pixel_array)
+newarray_buffer: process(pixel_arr_buffer, pixel_array, done0, done4, waiting)
 begin
 	if (waiting ='1' ) then
 		new_pixel_arr_buffer(7 downto 0)<=pixel_array(7 downto 0);
@@ -45,7 +45,7 @@ begin
 	end if;
 end process;
 
-newcolour_buffer: process(sprite_colour, colour_buffer)
+newcolour_buffer: process(sprite_colour, colour_buffer, done7)
 begin
 	if( done7 = '1') then
 		new_colour_buffer<=sprite_colour;
@@ -333,13 +333,13 @@ case state is
 		en_current_block_horizontal <= '0';
 		en_current_block_vertical <= '0';
 
-		if current_block_horizontal = "10111" then
+		if current_block_horizontal >= "10111" then
 			reset_current_block_horizontal <= '1';
 			new_state<=wait_state;
 			if county = "111" AND dual_pixel_y= '1' then
 				reset_county <= '1';
 				reset_dual_pixel_y<='1';
-				if current_block_vertical = "10111" then
+				if current_block_vertical >= "10111" then
 					reset_current_block_vertical <= '1';
 				else
 						en_current_block_vertical<='1';

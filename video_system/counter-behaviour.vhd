@@ -94,5 +94,6 @@ county <= in_county;
 current_block_horizontal <= in_current_block_horizontal;
 current_block_vertical <= in_current_block_vertical;
 dual_pixel_y <= in_dual_pixel_y;
+
 end behaviour;
 
