@@ -56,7 +56,6 @@ begin
 			elsif(sprite_select = "100") then  									--wall
 				color_out <= "001";								-- blue	
 				row_out <= "11111111";								-- all rows
-
 			else  									--open
 				color_out <= "000";								-- black	
 				row_out <= "11111111";								-- all rows

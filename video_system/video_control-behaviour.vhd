@@ -5,10 +5,10 @@ use IEEE.numeric_std.ALL;
 architecture behaviour of video_control is
 
 signal waiting, done0, done4, done7: std_logic;
-signal pixel_arr_buffer, new_pixel_arr_buffer: std_logic_vector(7 downto 0);
+
 signal colour_buffer, new_colour_buffer: std_logic_vector(2 downto 0);
 
-
+signal pixel_arr_buffer, new_pixel_arr_buffer: std_logic_vector(7 downto 0);
 
 type vc_state is(reset_state, wait_state, pixel_0,pixel_1,pixel_2,pixel_3,pixel_4,pixel_5,pixel_6,pixel_7);
 signal new_state, state: vc_state;
@@ -19,25 +19,25 @@ begin
 
 L1: process(clk, reset) 	
 begin
-if(clk'event and clk = '1') then
-	if (reset = '1') then
-		pixel_arr_buffer <= (others => '0');
-		colour_buffer <= (others => '0');
-	else
-		pixel_arr_buffer <= new_pixel_arr_buffer;
-		colour_buffer <= new_colour_buffer;
+	if(clk'event and clk = '1') then
+		if (reset = '1') then
+			pixel_arr_buffer <= (others => '0');
+			colour_buffer <= (others => '0');
+		else
+			pixel_arr_buffer <= new_pixel_arr_buffer;
+			colour_buffer <= new_colour_buffer;
+		end if;
 	end if;
-end if;
 end process;
 
 newarray_buffer: process(pixel_arr_buffer, pixel_array)
 begin
-	if waiting ='1' then
+	if (waiting ='1' ) then
 		new_pixel_arr_buffer(7 downto 0)<=pixel_array(7 downto 0);
-	elsif done0 = '1' then 
+	elsif (done0 = '1') then 
 		new_pixel_arr_buffer(7 downto 4)<=pixel_array(7 downto 4);
 		new_pixel_arr_buffer(3 downto 0)<= pixel_arr_buffer(3 downto 0);
-	elsif done4 = '1' then
+	elsif (done4 = '1') then
 		new_pixel_arr_buffer(3 downto 0)<=pixel_array(3 downto 0);
 		new_pixel_arr_buffer(7 downto 4)<= pixel_arr_buffer(7 downto 4);
 	else
@@ -60,16 +60,16 @@ end process;
 
 ib11: process(clk, reset)
 begin
-if(clk'event and clk = '1') then
-	if reset = '1' then
-		state<= reset_state;
-	else
-		state<= new_state;
+	if(clk'event and clk = '1') then
+		if reset = '1' then
+			state<= reset_state;
+		else
+			state<= new_state;
+		end if;
 	end if;
-end if;
 end process;
 
-lb12: process(sync, cell_type, sprite_colour, pixel_array, state, county,current_block_horizontal,current_block_vertical,dual_pixel_y,pixel_arr_buffer)
+lb12: process(sync, cell_type, sprite_colour, pixel_array, state, county, current_block_horizontal, current_block_vertical, dual_pixel_y, pixel_arr_buffer)
 begin
 case state is
 	when reset_state  =>
@@ -123,6 +123,7 @@ case state is
 		else
 			new_state<=wait_state;
 		end if;
+
 	when  pixel_0  =>	
 		waiting<='0';
 		done0 <= '1';
@@ -148,6 +149,7 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= county;
 		new_state<=pixel_1;
+
 	when pixel_1 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -173,6 +175,7 @@ case state is
 		sprite_type<=cell_type;
 		y_pos <= county;
 		new_state<=pixel_2;
+
 	when pixel_2 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -196,9 +199,10 @@ case state is
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
-		sprite_type<=cell_type;
+		sprite_type <= cell_type;
 		y_pos <= county;
-		new_state<=pixel_3;
+		new_state <= pixel_3;
+
 	when pixel_3 =>	
 		waiting<='0';
 		done0 <= '0';
@@ -221,9 +225,10 @@ case state is
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
-		sprite_type<=cell_type;
+		sprite_type <= cell_type;
 		y_pos <= county;
-		new_state<=pixel_4;
+		new_state <= pixel_4;
+
 	when pixel_4 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -233,7 +238,7 @@ case state is
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
 		reset_current_block_vertical <= '0';
-		reset_county<='0';
+		reset_county <= '0';
 
 		en_county <= '0';
 		en_current_block_horizontal <= '0';
@@ -247,9 +252,10 @@ case state is
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
-		sprite_type<=cell_type;
+		sprite_type <= cell_type;
 		y_pos <= county;
-		new_state<=pixel_5; 
+		new_state <= pixel_5; 
+
 	when pixel_5 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -273,9 +279,10 @@ case state is
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
-		sprite_type<=cell_type;
+		sprite_type <= cell_type;
 		y_pos <= county;
 		new_state<=pixel_6; 
+
 	when pixel_6 =>		
 		waiting<='0';
 		done0 <= '0';
@@ -313,7 +320,7 @@ case state is
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
-		sprite_type<=cell_type;
+		sprite_type <= cell_type;
 		y_pos <= county;
 
 		reset_dual_pixel_y<='0';
@@ -326,28 +333,29 @@ case state is
 		en_current_block_horizontal <= '0';
 		en_current_block_vertical <= '0';
 
-			if current_block_horizontal = "10111" then
-				reset_current_block_horizontal <= '1';
-				new_state<=wait_state;
-				if county = "111" AND dual_pixel_y= '1' then
-					reset_county <= '1';
-					if current_block_vertical = "10111" then
-						reset_current_block_vertical <= '1';
-					else
+		if current_block_horizontal = "10111" then
+			reset_current_block_horizontal <= '1';
+			new_state<=wait_state;
+			if county = "111" AND dual_pixel_y= '1' then
+				reset_county <= '1';
+				reset_dual_pixel_y<='1';
+				if current_block_vertical = "10111" then
+					reset_current_block_vertical <= '1';
+				else
 						en_current_block_vertical<='1';
-					end if;
-				else 
-					if dual_pixel_y = '1' then
-						en_county<='1';
-						reset_dual_pixel_y<='1';
-					else 
-						en_dual_pixel_y<='1';
-					end if;
 				end if;
-			else
-				en_current_block_horizontal <= '1';
-				new_state<= pixel_0;
+			else 
+				if dual_pixel_y = '1' then
+					en_county<='1';
+					reset_dual_pixel_y<='1';
+				else 
+					en_dual_pixel_y<='1';
+				end if;
 			end if;
+		else
+			en_current_block_horizontal <= '1';
+			new_state<= pixel_0;
+		end if;
 
 	end case;
 end process;		
