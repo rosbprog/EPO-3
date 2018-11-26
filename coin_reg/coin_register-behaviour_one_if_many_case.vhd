@@ -19,6 +19,15 @@ begin
   end if;
 end process;
 
+process(coin_memory)
+begin
+  if(coin_memory = "111111111111111111111111111111111111111111111111") then
+    zero_coins <= '1';
+  else
+    zero_coins <= '0';
+  end if;
+end process;
+
 coin_present <= not (coin_reached);
 score_add <= write_coin and coin_present;
 

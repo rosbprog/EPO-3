@@ -8,6 +8,7 @@ entity coin_register is
         row          : in  std_logic_vector(4 downto 0);
         column       : in  std_logic_vector(4 downto 0);
         coin_present : out std_logic;
-	score_add 	  : out std_logic);
+	score_add 	  : out std_logic;
+	zero_coins   : out std_logic);
 end coin_register;
 
