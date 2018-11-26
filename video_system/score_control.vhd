@@ -21,8 +21,7 @@ entity score_control is
 
 	en_county					: out std_logic;
 	en_current_block_horizontal					: out std_logic;
-	en_dual_pixel_y					: out std_logic;
-sssss	: out std_logic
+	en_dual_pixel_y					: out std_logic
 	);
 	
 end score_control;
