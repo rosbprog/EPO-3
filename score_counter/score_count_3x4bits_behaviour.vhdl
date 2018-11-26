@@ -22,7 +22,7 @@ begin
 	end if;
 end process;
 
-L2: process(plus)
+L2: process(plus,in_a,in_b,in_c)
 begin
 	if (plus='1') then
 		if (in_a<"1001") then
@@ -34,7 +34,7 @@ begin
 			new_b<=in_b+1;
 			new_c<=in_c;
 		elsif (in_b="1001" and in_c<"1001" and in_a="1001") then
-			new_a<=in_a;
+			new_a<="0000";
 			new_b<="0000";
 			new_c<=in_c+1;
 		else
