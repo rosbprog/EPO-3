@@ -38,9 +38,9 @@ begin
 			new_b<="0000";
 			new_c<=in_c+1;
 		else
-			in_a<="0000";
-			in_b<="0000";
-			in_c<="0000";
+			new_a<="0000";
+			new_b<="0000";
+			new_c<="0000";
 		end if;
 	else
 		new_a<=in_a;
