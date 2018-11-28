@@ -3,8 +3,8 @@ TU Delft - EE2L11 - EPO-3 - Pac-Man
 
 Project members:
   - Roy Bakker
-  - Dimme de Groot
   - Michael Goddijn
+  - Dimme de Groot
   - Isar Meijer
   - Alex Neagu
   - Roderick Tapia Barroso
