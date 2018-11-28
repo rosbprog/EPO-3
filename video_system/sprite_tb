@@ -1,0 +1,6 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity sprite_tb is
+end entity sprite_tb; 

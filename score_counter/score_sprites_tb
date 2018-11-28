@@ -1,0 +1,6 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity score_sprite_tb is
+end entity score_sprite_tb; 
