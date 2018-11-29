@@ -1,4 +1,4 @@
-architecture behavioural_case of coordinate_adder is
+architecture behavioural of coordinate_adder is
 begin
 
 	---------------------------------------------------------------------------------------------------------
@@ -26,4 +26,4 @@ begin
 		end case;
 	end process;
 
-end architecture behavioural_case;
+end architecture behavioural;
