@@ -5,8 +5,6 @@ use IEEE.numeric_std.all;
 
 entity coordinate_adder is
 	port (
-		clk_slow		: in	std_logic;			-- Clock signal of the sample clock
-
 		row_number_old		: in	std_logic_vector(4 downto 0);	-- Input bus representing the row number of the original cell
 		column_number_old	: in	std_logic_vector(4 downto 0);	-- Input bus representing the column number of the original cell
 		move			: in	std_logic_vector(3 downto 0);	-- Input bus representing the movement direction to the new cell:
