@@ -77,12 +77,33 @@ component counter is
 	en_dual_pixel_y				: in std_logic);
 
 end component;
+
+
+COMPONENT shift_system is
+   port(clk		      : in std_logic;
+	reset	      : in std_logic;
+
+	xcoordinates  : in  std_logic_vector(4 downto 0);
+        ycoordinates  : in  std_logic_vector(4 downto 0);
+        cell_state_in : in  std_logic_vector(2 downto 0);
+        y_pos_in      : in  std_logic_vector(2 downto 0);
+        pixel_arr_in  : in  std_logic_vector(7 downto 0);
+
+	screen_sync	  : in std_logic;
+
+	cell_state_out: out std_logic_vector(2 downto 0);
+        y_pos_out     : out std_logic_vector(2 downto 0);
+        pixel_arr_out : out std_logic_vector(7 downto 0));
+end component;
+
+
+
 	
 
 
-signal y_pos,sprite_type, colour, sprite_colour: std_logic_vector(2 downto 0);
+signal y_pos_shift ,sprite_type_shift, sprite_type_reg, y_pos_reg, colour, sprite_colour: std_logic_vector(2 downto 0);
 signal sync: std_logic;
-signal pixel_array: std_logic_vector(7 downto 0);
+signal pixel_array_shift, pixel_array_control: std_logic_vector(7 downto 0);
 signal	county:  std_logic_vector(2 downto 0);
 signal	dual_pixel_y: std_logic;
 signal	current_block_horizontal: std_logic_vector(4 downto 0);
@@ -92,17 +113,19 @@ signal	reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_v
 
 begin
 
-vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, colour, xcoordinates, ycoordinates,
+vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array_control, sprite_type_shift, y_pos_shift, colour, xcoordinates, ycoordinates,
 				  county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 				  reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 				  en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 
-sprites: sprite port map(y_pos, sprite_type, sprite_colour, pixel_array);
+sprites: sprite port map(y_pos_reg, sprite_type_reg, sprite_colour, pixel_array_shift);
 
 vgacontrol: vga_controll port map(clk, reset, colour, sync, red, green, blue, h_sync, v_sync, calc_start);
 
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 			 en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
+
+shft: shift_system port map(clk, reset, xcoordinates, ycoordinates, sprite_type_shift, y_pos_shift, pixel_array_shift, sync, sprite_type_reg, y_pos_reg, pixel_array_control);
 
 end architecture structural;
