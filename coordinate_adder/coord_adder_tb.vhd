@@ -10,8 +10,6 @@ architecture structural of coordinate_adder_tb is
 
 	component coordinate_adder is
 		port (
-			clk_slow		: in	std_logic;			-- Clock signal of the sample clock
-
 			row_number_old		: in	std_logic_vector(4 downto 0);	-- Input bus representing the row number of the original cell
 			column_number_old	: in	std_logic_vector(4 downto 0);	-- Input bus representing the column number of the original cell
 			move			: in	std_logic_vector(3 downto 0);	-- Input bus representing the movement direction to the new cell:
@@ -30,21 +28,16 @@ architecture structural of coordinate_adder_tb is
 	signal move					: std_logic_vector(3 downto 0);
 	signal row_number_old, column_number_old	: std_logic_vector(4 downto 0);
 	signal row_number_new, column_number_new	: std_logic_vector(4 downto 0);
-	signal clk_slow					: std_logic;
 
 begin
 
 	CA1: coordinate_adder port map (
-						clk_slow		=> clk_slow,
 						move			=> move,
 						row_number_old		=> row_number_old,
 						column_number_old	=> column_number_old,
 						row_number_new		=> row_number_new,
 						column_number_new	=> column_number_new
 				);
-
-	clk_slow <=	'0' after 0 ns,
-			'1' after 10 ns when clk_slow /= '1' else '0' after 10 ns;
 
 	row_number_old <=	"00010" after 0 ns,
 				"00100" after 10 ns,

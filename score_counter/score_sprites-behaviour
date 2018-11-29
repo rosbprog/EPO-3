@@ -31,9 +31,9 @@ begin
 			if (y_pos = vpos(0)) then
 				row_out <= "00000000";
 			elsif (y_pos = vpos(2)) then
-				row_out <= "00111000";
+				row_out <= "00011100";
 			elsif (y_pos = vpos(3)) then
-				row_out <= "01111000";
+				row_out <= "00011110";
 			elsif (y_pos = vpos(7)) then
 				row_out <= "01111110";
 			else
@@ -47,13 +47,13 @@ begin
 			elsif (y_pos = vpos(2)) then
 				row_out <= "01100110";
 			elsif (y_pos = vpos(3)) then
-				row_out <= "00000110";
+				row_out <= "01100000";
 			elsif (y_pos = vpos(4)) then
-				row_out <= "00001100";
+				row_out <= "00110000";
 			elsif (y_pos = vpos(5)) then
 				row_out <= "00011000";
 			elsif (y_pos = vpos(6)) then
-				row_out <= "00110000";
+				row_out <= "00001100";
 			else
 				row_out <= "01111110";
 			end if;
@@ -65,7 +65,7 @@ begin
 			elsif (y_pos = vpos(2) OR y_pos = vpos(6)) then
 				row_out <= "01100110";
 			elsif (y_pos = vpos(3) OR y_pos = vpos(5)) then
-				row_out <= "00000110";
+				row_out <= "01100000";
 			else
 				row_out <= "00011000";
 			end if;
@@ -73,13 +73,13 @@ begin
 			if (y_pos = vpos(0)) then
 				row_out <= "00000000";
 			elsif (y_pos = vpos(1) OR y_pos = vpos(6) OR y_pos = vpos(7)) then
-				row_out <= "00001100";
+				row_out <= "00110000";
 			elsif (y_pos = vpos(2)) then
-				row_out <= "00011100";
+				row_out <= "00111000";
 			elsif (y_pos = vpos(3)) then
 				row_out <= "00111100";
 			elsif (y_pos = vpos(4)) then
-				row_out <= "01101100";
+				row_out <= "00110110";
 			else
 				row_out <= "01111110";
 			end if;
@@ -89,7 +89,7 @@ begin
 			elsif (y_pos = vpos(1)) then
 				row_out <= "01111110";
 			elsif (y_pos = vpos(2)) then
-				row_out <= "01100000";
+				row_out <= "00000110";
 			elsif (y_pos = vpos(3)) then
 				row_out <= "01111100";
 			elsif (y_pos = vpos(6)) then
@@ -97,7 +97,7 @@ begin
 			elsif (y_pos = vpos(7)) then
 				row_out <= "00111100";
 			else
-				row_out <= "00000110";
+				row_out <= "01100000";
 			end if;
 		elsif (score_sprite_select = "0110") then 		-- six
 			if (y_pos = vpos(0)) then
@@ -105,9 +105,9 @@ begin
 			elsif (y_pos = vpos(1) OR y_pos = vpos(7)) then
 				row_out <= "00111100";
 			elsif (y_pos = vpos(3)) then
-				row_out <= "01100000";
+				row_out <= "00000110";
 			elsif (y_pos = vpos(4)) then
-				row_out <= "01111100";
+				row_out <= "00111110";
 			else
 				row_out <= "01100110";
 			end if;
@@ -119,7 +119,7 @@ begin
 			elsif (y_pos = vpos(2)) then
 				row_out <= "01100110";
 			elsif (y_pos = vpos(3) OR y_pos = vpos(4)) then
-				row_out <= "00001100";
+				row_out <= "00110000";
 			else
 				row_out <= "00011000";
 			end if;
@@ -137,9 +137,9 @@ begin
 			elsif (y_pos = vpos(1) OR y_pos = vpos(7)) then
 				row_out <= "00111100";
 			elsif (y_pos = vpos(4)) then
-				row_out <= "00111110";
+				row_out <= "01111100";
 			elsif (y_pos = vpos(5)) then
-				row_out <= "00000110";
+				row_out <= "01100000";
 			else
 				row_out <= "01100110";
 			end if;
@@ -149,11 +149,11 @@ begin
 			elsif (y_pos = vpos(1) OR y_pos = vpos(7)) then
 				row_out <= "00111100";
 			elsif (y_pos = vpos(3)) then
-				row_out <= "01110000";
+				row_out <= "00001110";
 			elsif (y_pos = vpos(4)) then
 				row_out <= "00111100";
 			elsif (y_pos = vpos(5)) then
-				row_out <= "00001110";
+				row_out <= "01110000";
 			else
 				row_out <= "01100110";
 			end if;
@@ -161,11 +161,11 @@ begin
 			if (y_pos = vpos(0)) then
 				row_out <= "00000000";
 			elsif (y_pos = vpos(1) OR y_pos = vpos(7)) then
-				row_out <= "00011100";
+				row_out <= "00111000";
 			elsif (y_pos = vpos(2) OR y_pos = vpos(6)) then
-				row_out <= "00110110";
+				row_out <= "01101100";
 			else
-				row_out <= "01100000";
+				row_out <= "00000110";
 			end if;
 		elsif (score_sprite_select = "1101") then 		-- R
 			if (y_pos = vpos(0)) then
@@ -173,7 +173,7 @@ begin
 			elsif (y_pos = vpos(1) OR y_pos = vpos(4)) then
 				row_out <= "01111100";
 			elsif (y_pos = vpos(5)) then
-				row_out <= "01101100";
+				row_out <= "00110110";
 			else
 				row_out <= "01100110";
 			end if;
@@ -185,7 +185,7 @@ begin
 			elsif (y_pos = vpos(4)) then
 				row_out <= "01111100";
 			else
-				row_out <= "01100000";
+				row_out <= "00000110";
 			end if;
 		else							-- ':'
 			if (y_pos = vpos(0) OR y_pos = vpos(4)) then
