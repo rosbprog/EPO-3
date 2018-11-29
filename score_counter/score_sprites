@@ -9,6 +9,6 @@ entity score_sprite is
 		--0110 is 6, 0111 is 7, 1000 is 8, 1001 is 9, 1010 is S, 1011 is C,
 		--1101 is R, 1110 is E, 1111 is ':'
 		row_out			:out std_logic_vector (7 downto 0)
-		--left to right
+		--right to left
 		);
 end entity score_sprite;
