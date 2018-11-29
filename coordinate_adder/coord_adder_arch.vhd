@@ -7,7 +7,6 @@ begin
 	---------------------------------------------------------------------------------------------------------
 	calc_proc: process(row_number_old, column_number_old)
 	begin
-<<<<<<< HEAD
 		case move is
 			when "0001" =>
 				row_number_new		<= row_number_old;
@@ -25,12 +24,6 @@ begin
 				row_number_new		<= row_number_old;
 				column_number_new	<= column_number_old;
 		end case;
-=======
-		row_number_new 		<= std_logic_vector(unsigned(row_number_old) -
-			move(1) + move(3));
-		column_number_new 	<= std_logic_vector(unsigned(column_number_old) -
-			move(2) + move(0));
->>>>>>> 40ed300e268dd9fdd2f52537d9708782f48b1458
 	end process;
 
 end architecture behavioural_case;
