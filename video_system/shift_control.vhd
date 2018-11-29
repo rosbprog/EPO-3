@@ -15,11 +15,14 @@ entity shift_control is
 	pacman_pos_y  : in std_logic_vector(4 downto 0);
 
 	screen_sync	  : in std_logic;
+	shift_pulse	  : in std_logic;
 
 	pacman_pos_x_new: out std_logic_vector(4 downto 0);
 	pacman_pos_y_new: out std_logic_vector(4 downto 0);
-	pacman_load	 	: out std_logic;
-	pacman_reset	 	: out std_logic;
+	pacman_pos_load	 	: out std_logic;
+	pacman_pos_reset	 	: out std_logic;
+
+	shift_clock_reset: out std_logic;
 
 	cell_state_out: out std_logic_vector(2 downto 0);
         y_pos_out     : out std_logic_vector(2 downto 0);
