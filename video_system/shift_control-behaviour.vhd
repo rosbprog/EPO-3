@@ -48,7 +48,7 @@ case state is
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
-		if cell_state_in = "011" then	
+		if cell_state_in = "001" then	
 			if (xcoordinates = pacman_pos_x) AND (ycoordinates = pacman_pos_y) then
 				new_state <= buffer_state;
 -- buffer state because coordinates are changed before cell_state, meaning that it will uncorrectly go to right shift if coordinates are incremented					
