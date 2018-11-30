@@ -4,7 +4,7 @@ use IEEE.numeric_std.ALL;
 
 architecture behaviour of score_control is
 
-signal waiting, done0, done4, done7: std_logic;
+signal waiting, done0, done4: std_logic;
 
 signal pixel_arr_buffer, new_pixel_arr_buffer: std_logic_vector(7 downto 0);
 
@@ -52,6 +52,31 @@ begin
 	end if;
 end process;
 
+L21: process( score_a, score_b, score_c, current_block_horizontal)
+begin
+	case current_block_horizontal is
+		when "01101" => 
+			new_score_type <=  "1010";
+		when "01110" =>
+			new_score_type <=  "1011";
+		when "01111" =>
+			new_score_type <=  "0000";
+		when "10000" =>
+			new_score_type <=  "1101";
+		when "10001" =>
+			new_score_type <=  "1110";
+		when "10010" =>
+			new_score_type <=  "1111";
+		when "10011" =>
+			new_score_type <=  score_c;
+		when "10100" =>
+			new_score_type <=  score_b;
+		when "10101" =>
+			new_score_type <=  score_a;
+		when others =>
+			new_score_type <=  "1100";
+	end case;
+end process;
 
 
 L3: process(clk, reset)
@@ -72,7 +97,6 @@ case state is
 		waiting <= '1';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '1';
 
 		reset_dual_pixel_y<='1';
 		reset_current_block_horizontal <= '1';
@@ -84,13 +108,15 @@ case state is
 
 		score_sprite_type<=score_type;
 		score_y_pos <= county;
+		colour(0) <= '0';
+		colour(1) <= '0';
+		colour(2) <= '0';
 		new_state <= wait_state;
 
 	when wait_state  =>
 		waiting <= '1';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '1';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -102,6 +128,9 @@ case state is
 
 		score_sprite_type<= score_type;
 		score_y_pos <= county;
+		colour(0) <= '0';
+		colour(1) <= '0';
+		colour(2) <= '0';
 		if score_sync='1' then
 			new_state <= pixel_0;
 		else
@@ -112,7 +141,6 @@ case state is
 		waiting<='0';
 		done0 <= '1';
 		done4 <= '0';
-		done7 <= '0';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -134,7 +162,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '0';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -156,7 +183,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '0';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -179,7 +205,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '0';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -201,7 +226,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '1';
-		done7 <= '0';
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -223,8 +247,7 @@ case state is
 	when pixel_5 =>		
 		waiting<='0';
 		done0 <= '0';
-		done4 <= '0';
-		done7 <= '0';		
+		done4 <= '0';	
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -247,7 +270,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '0';		
 
 		reset_dual_pixel_y<='0';
 		reset_current_block_horizontal <= '0';
@@ -268,7 +290,6 @@ case state is
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
-		done7 <= '1';
 
 		colour(0) <= not(pixel_arr_buffer(7));
 		colour(1) <= pixel_arr_buffer(7);
@@ -303,6 +324,25 @@ case state is
 			en_current_block_horizontal <= '1';
 			new_state<= pixel_0;
 		end if;
+	when others =>
+		waiting <= '0';
+		done0 <= '0';
+		done4 <= '0';
+
+		reset_dual_pixel_y<='1';
+		reset_current_block_horizontal <= '1';
+		reset_county<='1';
+
+		en_county <= '0';
+		en_current_block_horizontal <= '0';
+		en_dual_pixel_y <= '0';
+
+		score_sprite_type<=score_type;
+		score_y_pos <= county;
+		colour(0) <= '0';
+		colour(1) <= '0';
+		colour(2) <= '0';
+		new_state <= reset_state;
 
 	end case;
 end process;		

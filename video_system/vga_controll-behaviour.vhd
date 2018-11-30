@@ -63,7 +63,7 @@ L3:		process( hcount, vcount)
 			else
 				pixel_sync <= '0';
 			end if;
-			if (vcount = 480) then
+			if (vcount = 480 and hcount = 0) then
 				calc_start <= '1';
 			else 
 				calc_start <= '0';
@@ -84,5 +84,6 @@ L4:		process(hcount,vcount,rgb)
 		end process;
 
 end architecture vga_behavioral;		
+
 
 

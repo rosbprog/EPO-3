@@ -356,6 +356,29 @@ case state is
 			en_current_block_horizontal <= '1';
 			new_state<= pixel_0;
 		end if;
+	when others =>
+		waiting <= '0';
+		done0 <= '0';
+		done4 <= '0';
+		done7 <= '0';
+
+		reset_dual_pixel_y<='1';
+		reset_current_block_horizontal <= '1';
+		reset_current_block_vertical <= '1';
+		reset_county<='1';
+
+		en_county <= '0';
+		en_current_block_horizontal <= '0';
+		en_current_block_vertical <= '0';
+		en_dual_pixel_y <= '0';
+
+		colour<="000";
+
+		xcoordinates <= "00000";
+		ycoordinates <= "00000";
+		sprite_type<=cell_type;
+		y_pos <= county;
+		new_state<=reset_state;
 
 	end case;
 end process;		
