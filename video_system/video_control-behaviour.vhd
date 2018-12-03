@@ -162,7 +162,7 @@ case state is
 		reset_county<='0';
 
 		en_county <= '0';
-		en_current_block_horizontal <= '0';
+		en_current_block_horizontal <= '1';
 		en_current_block_vertical <= '0';
 		en_dual_pixel_y <= '0';
 
@@ -333,7 +333,7 @@ case state is
 		en_current_block_horizontal <= '0';
 		en_current_block_vertical <= '0';
 
-		if current_block_horizontal >= "10111" then
+		if current_block_horizontal >= "11000" then
 			reset_current_block_horizontal <= '1';
 			new_state<=wait_state;
 			if county = "111" AND dual_pixel_y= '1' then
@@ -353,7 +353,6 @@ case state is
 				end if;
 			end if;
 		else
-			en_current_block_horizontal <= '1';
 			new_state<= pixel_0;
 		end if;
 	when others =>
