@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 
-architecture behaviour of shift_system is
+architecture structural of shift_system is
 
 component shift_control is
    port(clk		      : in std_logic;
@@ -97,5 +97,5 @@ reg: pacman_position_reg port map(	pacman_pos_x_new,
 
 
 
-end behaviour;
+end structural;
 
