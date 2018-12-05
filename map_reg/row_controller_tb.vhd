@@ -21,10 +21,10 @@ architecture behavioural_row_controller_tb of row_controller_tb is
 
 begin	
 
-	RC1: row_controller port map (
-				row_select 	=> row_select,
-				row_cells	=> row_cells
-			);
+	RC1: entity work.row_controller(behavioural_half) port map (
+									row_select 	=> row_select,
+									row_cells	=> row_cells
+								);
 
 	row_select <= 	"00000" after 0 ns,
 			"00001" after 10 ns,

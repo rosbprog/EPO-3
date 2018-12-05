@@ -13,11 +13,11 @@ architecture structural of map_register_tb is
 		port (
 			row_select	: in	std_logic_vector(4 downto 0);
 			column_select	: in	std_logic_vector(4 downto 0);
-			cell_value	: out	std_logic
+			wall_present	: out	std_logic
 		);
 	end component map_register;
 
-	signal cell_value			: std_logic;
+	signal wall_present			: std_logic;
 	signal row_select, column_select	: std_logic_vector(4 downto 0);
 
 begin
@@ -25,7 +25,7 @@ begin
 	MP1: map_register port map (
 					row_select	=> row_select,
 					column_select	=> column_select,
-					cell_value	=> cell_value
+					wall_present	=> wall_present
 				);
 
 	column_select <=	"00000" after 5 ns,

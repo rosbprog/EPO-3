@@ -11,7 +11,7 @@ architecture behaviour of map_register is
 
 begin
 
-	RC1: row_controller port map (
+	RC1: entity work.row_controller(behavioural_half) port map (
 					row_select 	=> row_select,
 					row_cells	=> row_cells
 				);
@@ -24,9 +24,9 @@ begin
 	col_sel_proc: process(column_select)
 	begin
 		if unsigned(column_select) < 24 then
-			cell_value <= row_cells(to_integer(unsigned(column_select)));
+			wall_present <= row_cells(to_integer(unsigned(column_select)));
 		else
-			cell_value <= '0';
+			wall_present <= '0';
 		end if;
 	end process;
 
