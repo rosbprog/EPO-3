@@ -4,8 +4,9 @@ entity score_control is
   port(	clk           					: in  std_logic;
        	reset         					: in  std_logic;
        	score_sync          					: in  std_logic;
-       	score     					: in  std_logic_vector(9 downto 0);
-       	sprite_colour 					: in  std_logic_vector(2 downto 0);
+       	score_a     					: in  std_logic_vector(3 downto 0);
+	score_b     					: in  std_logic_vector(3 downto 0);
+	score_c     					: in  std_logic_vector(3 downto 0);
 	pixel_array   					: in  std_logic_vector(7 downto 0);
 
 	dual_pixel_y					: in std_logic;
