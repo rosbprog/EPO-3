@@ -1,3 +1,10 @@
+---------------------------------------------------------------------------------------------------------
+-- TSMC SYNTHESIS RESULT:
+-- Row controller arch:	behavioural_half
+-- Inverter Cells:	5
+-- Logic Cells:		61
+-- Total Area:		777.101 um^2
+---------------------------------------------------------------------------------------------------------
 architecture behaviour of map_register is
 
 	component row_controller is
