@@ -5,6 +5,7 @@ use IEEE.numeric_std.all;
 architecture vga_behavioral of vga_controll is
 
 signal hcount, vcount, new_hcount, new_vcount: unsigned(9 downto 0);
+signal in_h_sync, in_v_sync, new_h_sync, new_v_sync, in_red, new_red, in_blue, new_blue, in_green, new_green: std_logic;
 
 begin
 
@@ -13,24 +14,34 @@ L1:		process(clk, reset)
 		if (rising_edge(clk)) then
 			if (reset = '1') then
 				hcount <= (others => '0');
-				vcount <= (others => '0');			
+				vcount <= (others => '0');	
+				in_h_sync <= '0'; 
+				in_v_sync <= '0';
+				in_red <= '0';
+				in_green <= '0';
+				in_blue <= '0';
 			else 
 				hcount <= new_hcount;
 				vcount <= new_vcount;
+				in_h_sync <= new_h_sync;
+				in_v_sync <= new_v_sync;
+				in_red <= new_red;
+				in_green <= new_green;
+				in_blue <= new_blue;
 			end if;
 		end if;
 		end process; 
 
 L2:		process(hcount, vcount)
 		begin
-			if(hcount = 399) then
+			if(hcount = 399) then --end_h
 				new_hcount <= (others => '0');
 			else
 				new_hcount <= hcount + 1;
 			end if;
 
-			if(hcount = 349) then
-				if(vcount = 524) then
+			if(hcount = 349) then --inc_v
+				if(vcount = 524) then --end_v
 					new_vcount <= (others => '0');
 				else
 					new_vcount <= vcount + 1;
@@ -39,20 +50,24 @@ L2:		process(hcount, vcount)
 				new_vcount <= vcount;
 			end if;
 		end process;
-
 		
-L3:		process( hcount, vcount)
+L31:		process( hcount, vcount, in_h_sync, in_v_sync)
 		begin
-			if (hcount<376 and hcount>327) then
-				h_sync <= '0';
+			if (hcount=375) then
+				new_h_sync <= '1';
+			elsif(hcount=327) then
+				new_h_sync <= '0';
 			else 
-				h_sync <= '1';
+				new_h_sync <= in_h_sync;
 			end if;
-			if (vcount<492 and vcount>489) then
-				v_sync <= '0';
+			if (vcount=491) then
+				new_v_sync <= '1';
+			elsif(vcount=489) then
+				new_v_sync <= '0';
 			else 
-				v_sync <= '1';
+				new_v_sync <= in_v_sync;
 			end if;
+			
 			if(hcount=64 and (vcount >= 32 and vcount<=47)) then
 				score_pixel_sync <= '1';
 			else
@@ -72,18 +87,27 @@ L3:		process( hcount, vcount)
 
 L4:		process(hcount,vcount,rgb)
 		begin
-			if (hcount<=319 and vcount<=479)then
-				red <= rgb(2);
-				green <= rgb(1);
-				blue <= rgb(0);
+			if (hcount<=318 and vcount<=478)then
+				new_red <= rgb(2);
+				new_green <= rgb(1);
+				new_blue <= rgb(0);
 			else 
-				red <= '0';
-				green <= '0';
-				blue <= '0';
+				new_red <= '0';
+				new_green <= '0';
+				new_blue <= '0';
 			end if;
 		end process;
 
+		h_sync <= in_h_sync;
+		v_sync <= in_v_sync;
+		red <= in_red;
+		green <= in_green;
+		blue <= in_blue;
+		
 end architecture vga_behavioral;		
+
+
+
 
 
 
