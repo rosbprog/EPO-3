@@ -190,10 +190,10 @@ begin
 		elsif (score_sprite_select = "1100") then 		-- E
 				row_out <= "00000000";
 		else							-- ':'
-			if (y_pos = vpos(0) OR y_pos = vpos(4)) then
+			if (y_pos = vpos(0) OR y_pos = vpos(1) OR y_pos = vpos(4) OR y_pos = vpos(7)) then
 				row_out <= "00000000";
 			else
-				row_out <= "00111100";
+				row_out <= "00011000";
 			end if;
 		end if;
 	end process;
