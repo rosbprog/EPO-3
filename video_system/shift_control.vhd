@@ -11,16 +11,12 @@ entity shift_control is
         y_pos_in      : in  std_logic_vector(2 downto 0);
         pixel_arr_in  : in  std_logic_vector(7 downto 0);
 
-	sprite_colour_in     : in  std_logic_vector(2 downto 0);
-
 
 	pacman_pos_x	 : in std_logic_vector(4 downto 0);
 	pacman_pos_y  : in std_logic_vector(4 downto 0);
 
 	screen_sync	  : in std_logic;
 	shift_pulse	  : in std_logic;
-	
-	sprite_colour_out : out std_logic(2 downto 0);
 
 	pacman_pos_x_new: out std_logic_vector(4 downto 0);
 	pacman_pos_y_new: out std_logic_vector(4 downto 0);
