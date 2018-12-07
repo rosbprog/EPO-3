@@ -3,11 +3,12 @@ architecture behavioural of counter is
 begin
 	process(vc_done)
 	begin
-		if (rising_edge(vc_done)) then
 			if (c_rst='1') then
 				count <= (others=> '0');
-			else
+			elsif (rising_edge(vc_done)) then
 				count <=count+1;
+			else
+				count <= count;
 			end if;
 		end if;
 	end process;
