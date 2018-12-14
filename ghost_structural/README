@@ -1,0 +1,9 @@
+This is the structural description of the ghost components, these are:
+- Inputbuffer (complete with flipflop)
+- Inputcontroller
+- Coordinate Adder
+- Coordinate Mux
+- Coordinate register
+- Ghost controller
+
+This structural can be used for both ghosts.
