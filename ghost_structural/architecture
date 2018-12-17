@@ -1,5 +1,3 @@
--- After synthesis, the total area was 3040 square micrometers
-
 library IEEE;
 use IEEE.std_logic_1164.ALL;
 
@@ -88,3 +86,4 @@ L4: coordinate_register port map (clk, reset, row_reset, col_reset, row_muxxed, 
 L5: ghost_cont port map (clk, reset, ghost_start, pos_is_wall, mux_select, ghost_ready, en_wall);
 
 end structural;
+
