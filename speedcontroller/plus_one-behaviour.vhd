@@ -1,0 +1,8 @@
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+
+architecture behaviour of plus_one is
+begin
+	count_out	<= std_logic_vector(unsigned(count_in)+1);
+end behaviour;
+
