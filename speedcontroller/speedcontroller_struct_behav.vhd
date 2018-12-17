@@ -17,27 +17,27 @@ architecture structural of speedcontroller is
 
 	component register_7bit is
 		port(	clk		: in	std_logic;
-			count_in		: in	std_logic_vector(6 downto 0);
+			count_in	: in	std_logic_vector(6 downto 0);
 			c_rst		: in 	std_logic; 
-			count_out 		: out 	std_logic_vector(6 downto 0));
+			count_out 	: out 	std_logic_vector(6 downto 0));
 	end component register_7bit;
 
 	component multiplexer is
 		port(	vc_done   : in  std_logic;
-        			count_old : in  std_logic_vector(6 downto 0);
-        			count_new : in  std_logic_vector(6 downto 0);
-        			count     : out std_logic_vector(6 downto 0)
+        		count_old : in  std_logic_vector(6 downto 0);
+        		count_new : in  std_logic_vector(6 downto 0);
+        		count     : out std_logic_vector(6 downto 0)
 		);
 	end component multiplexer;
 
 	component plus_one is
 		port(	count_in  : in  std_logic_vector(6 downto 0);
-        			count_out : out std_logic_vector(6 downto 0)
+        		count_out : out std_logic_vector(6 downto 0)
 		);
 	end component plus_one;
 	
 	signal count_intern, count_int2, count_int3	: std_logic_vector(6 downto 0);
-	signal c_rst_int			: std_logic;			
+	signal c_rst_int				: std_logic;			
 	
 begin
 LBL1: fsm_counter		port map(		
