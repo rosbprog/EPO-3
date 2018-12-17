@@ -101,28 +101,51 @@ component counter is
 	en_dual_pixel_y				: in std_logic);
 
 end component;
+
+component shift_system is
+   port(clk		      : in std_logic;
+	reset	      : in std_logic;
+
+	xcoordinates_shift  : in  std_logic_vector(4 downto 0);
+        ycoordinates_shift  : in  std_logic_vector(4 downto 0);
+        cell_state_in_shift : in  std_logic_vector(2 downto 0);
+        y_pos_in_shift      : in  std_logic_vector(2 downto 0);
+        pixel_arr_in_shift  : in  std_logic_vector(7 downto 0);
 	
+	screen_sync	  : in std_logic;
+
+	cell_state_out_shift: out std_logic_vector(2 downto 0);
+        y_pos_out_shift     : out std_logic_vector(2 downto 0);
+        pixel_arr_out_shift : out std_logic_vector(7 downto 0)
 
 
-signal y_pos,sprite_type, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
-signal sync, score_sync: std_logic;
-signal pixel_array: std_logic_vector(7 downto 0);
+);
+end component;
+
+signal cell_type_test: std_logic_vector(2 downto 0);
+
+signal y_pos_to_shift, y_pos_shifted, sprite_type_to_shift, sprite_type_to_register, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
+signal sync, score_sync, calc_start_internal: std_logic;
+signal pixel_array_to_shift, pixel_array_shifted: std_logic_vector(7 downto 0);
 signal	county:  std_logic_vector(2 downto 0);
 signal	dual_pixel_y: std_logic;
-signal	current_block_horizontal: std_logic_vector(4 downto 0);
+signal	current_block_horizontal, ycoordinates_internal, xcoordinates_internal: std_logic_vector(4 downto 0);
 signal	current_block_vertical :  std_logic_vector(4 downto 0);
 signal	reset_dual_pixel_y, reset_dual_pixel_y_score, reset_dual_pixel_y_video, reset_current_block_horizontal, reset_current_block_horizontal_score, reset_current_block_horizontal_video, reset_current_block_vertical, reset_county,	reset_county_score, reset_county_video, en_county, en_county_score, en_county_video, en_current_block_horizontal, en_current_block_horizontal_score, en_current_block_horizontal_video, en_current_block_vertical, en_dual_pixel_y, en_dual_pixel_y_score, en_dual_pixel_y_video: std_logic;	
 
 begin
 
-vidcontrol: video_control port map(clk, reset, sync, cell_type, sprite_colour, pixel_array, sprite_type, y_pos, rgb_video, xcoordinates, ycoordinates,
+vidcontrol: video_control port map(clk, reset, sync, cell_type_test, sprite_colour, pixel_array_shifted, sprite_type_to_shift, y_pos_to_shift, rgb_video, xcoordinates_internal, ycoordinates_internal,
 				  county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 				  reset_dual_pixel_y_video, reset_current_block_horizontal_video, reset_current_block_vertical, reset_county_video,
 				  en_county_video, en_current_block_horizontal_video, en_current_block_vertical, en_dual_pixel_y_video);
 
-sprites: sprite port map(y_pos, sprite_type, sprite_colour, pixel_array);
+sprites: sprite port map(y_pos_shifted, sprite_type_to_register, sprite_colour, pixel_array_to_shift);
 
-vgacontrol: vga_controll port map(clk, reset, colour, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start);
+shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_internal, sprite_type_to_shift, y_pos_to_shift, pixel_array_to_shift, calc_start_internal, sprite_type_to_register, y_pos_shifted, pixel_array_shifted
+);
+
+vgacontrol: vga_controll port map(clk, reset, colour, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal);
 
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
@@ -141,6 +164,24 @@ reset_county <= reset_county_score OR reset_county_video;
 en_dual_pixel_y <= en_dual_pixel_y_score OR en_dual_pixel_y_video;
 en_current_block_horizontal <= en_current_block_horizontal_score OR en_current_block_horizontal_video;
 en_county <= en_county_score OR en_county_video; 
+
+
+xcoordinates <= xcoordinates_internal;
+ycoordinates <= ycoordinates_internal;
+
+calc_start <= calc_start_internal;
+
+process(xcoordinates_internal, ycoordinates_internal)
+
+begin
+
+	if((xcoordinates_internal = "01111" OR xcoordinates_internal = "10000" ) AND ycoordinates_internal = "01111") then
+		cell_type_test <= "001";
+	else
+		cell_type_test <= "010";
+	end if;
+end process;
+
 
 
 end architecture structural;

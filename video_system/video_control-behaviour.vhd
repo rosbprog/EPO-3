@@ -35,11 +35,11 @@ begin
 	if (waiting ='1' ) then
 		new_pixel_arr_buffer(7 downto 0)<=pixel_array(7 downto 0);
 	elsif (done0 = '1') then 
-		new_pixel_arr_buffer(7 downto 4)<=pixel_array(7 downto 4);
-		new_pixel_arr_buffer(3 downto 0)<= pixel_arr_buffer(3 downto 0);
-	elsif (done4 = '1') then
 		new_pixel_arr_buffer(3 downto 0)<=pixel_array(3 downto 0);
 		new_pixel_arr_buffer(7 downto 4)<= pixel_arr_buffer(7 downto 4);
+	elsif (done4 = '1') then
+		new_pixel_arr_buffer(7 downto 4)<=pixel_array(7 downto 4);
+		new_pixel_arr_buffer(3 downto 0)<= pixel_arr_buffer(3 downto 0);
 	else
 		new_pixel_arr_buffer<= pixel_arr_buffer;
 	end if;
@@ -69,7 +69,7 @@ begin
 	end if;
 end process;
 
-lb12: process(sync, cell_type, sprite_colour, pixel_array, state, county, current_block_horizontal, current_block_vertical, dual_pixel_y, pixel_arr_buffer)
+lb12: process(sync, cell_type, colour_buffer, pixel_array, state, county, current_block_horizontal, current_block_vertical, dual_pixel_y, pixel_arr_buffer)
 begin
 case state is
 	when reset_state  =>
@@ -140,9 +140,9 @@ case state is
 		en_current_block_vertical <= '0';
 		en_dual_pixel_y <= '0';
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(0));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(0));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(0));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(7));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(7));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(7));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -166,9 +166,9 @@ case state is
 		en_current_block_vertical <= '0';
 		en_dual_pixel_y <= '0';
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(1));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(1));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(1));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(6));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(6));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(6));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -193,9 +193,9 @@ case state is
 		en_dual_pixel_y <= '0';
 
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(2));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(2));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(2));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(5));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(5));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(5));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -219,9 +219,9 @@ case state is
 		en_current_block_vertical <= '0';
 		en_dual_pixel_y <= '0';
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(3));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(3));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(3));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(4));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(4));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(4));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -246,9 +246,9 @@ case state is
 		en_dual_pixel_y <= '0';
 
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(4));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(4));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(4));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(3));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(3));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(3));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -273,9 +273,9 @@ case state is
 		en_dual_pixel_y <= '0';
 
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(5));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(5));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(5));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(2));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(2));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(2));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
@@ -299,24 +299,25 @@ case state is
 		en_current_block_horizontal <= '0';
 		en_current_block_vertical <= '0';
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(6));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(6));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(6));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(1));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(1));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(1));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;
 		sprite_type<=cell_type;
 		y_pos <= county;
 		new_state<=pixel_7; 
+
 	when pixel_7 =>		
 		waiting<='0';
 		done0 <= '0';
 		done4 <= '0';
 		done7 <= '1';
 
-		colour(0) <= (sprite_colour(0) AND pixel_arr_buffer(7));
-		colour(1) <= (sprite_colour(1) AND pixel_arr_buffer(7));
-		colour(2) <= (sprite_colour(2) AND pixel_arr_buffer(7));
+		colour(0) <= ( colour_buffer(0) AND pixel_arr_buffer(0));
+		colour(1) <= ( colour_buffer(1) AND pixel_arr_buffer(0));
+		colour(2) <= ( colour_buffer(2) AND pixel_arr_buffer(0));
 
 		xcoordinates <= current_block_horizontal;
 		ycoordinates <= current_block_vertical;

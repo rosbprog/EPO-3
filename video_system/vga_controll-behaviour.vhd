@@ -106,8 +106,3 @@ L4:		process(hcount,vcount,rgb)
 		
 end architecture vga_behavioral;		
 
-
-
-
-
-

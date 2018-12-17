@@ -23,7 +23,7 @@ begin
 		end if;
 	end if;
 end process;
-lb12: process(state, xcoordinates, ycoordinates, cell_state_in, y_pos_in, pixel_arr_in, pacman_pos_x, pacman_pos_y)
+lb12: process(state, xcoordinates, ycoordinates, cell_state_in, y_pos_in, pixel_arr_in, pacman_pos_x, pacman_pos_y, screen_sync, shift_pulse)
 
 begin
 
@@ -49,12 +49,12 @@ case state is
 		pixel_arr_out<=pixel_arr_in;
 		
 		if cell_state_in = "001" then	
-			if (xcoordinates = pacman_pos_x) AND (ycoordinates = pacman_pos_y) then
-				new_state <= buffer_state;
+			--if (xcoordinates = pacman_pos_x) AND (ycoordinates = pacman_pos_y) then
+			--	new_state <= buffer_state;
 -- buffer state because coordinates are changed before cell_state, meaning that it will uncorrectly go to right shift if coordinates are incremented					
 
 -- compares current pacman position with new pacman position, thus determining the shift direction.
-			elsif (xcoordinates = pacman_pos_x + 1) AND (ycoordinates = pacman_pos_y) then
+			if (xcoordinates = pacman_pos_x + 1) AND (ycoordinates = pacman_pos_y) then
 				pacman_pos_x_new<=xcoordinates;
 				pacman_pos_y_new<=ycoordinates;
 				pacman_pos_load<='1';
@@ -82,7 +82,7 @@ case state is
 				pacman_pos_x_new<=xcoordinates;
 				pacman_pos_y_new<=ycoordinates;
 				pacman_pos_load<='1';
-				new_state <= buffer_state;
+				new_state <= wait_state;
 			end if;
 		else
 			new_state<=wait_state;
@@ -438,7 +438,7 @@ case state is
 			pixel_arr_out <= ("0" & pixel_arr_in(7 downto 1));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
 			cell_state_out<="001";
-			pixel_arr_out <= (pixel_arr_in(1) & "0000000");
+			pixel_arr_out <= (pixel_arr_in(0) & "0000000");
 		end if;
 			
 		if shift_pulse = '1' then
@@ -879,4 +879,5 @@ end process;
 
 
 end behaviour;
+
 

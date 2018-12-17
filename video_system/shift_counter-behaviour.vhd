@@ -56,6 +56,7 @@ if sync = '1' then
 else 
 	new_count_internal<= count_internal;
 	new_shift_sync<='0';
+	new_dual <= dual;
 end if;
 
 end process;
