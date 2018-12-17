@@ -5,7 +5,7 @@ begin
 	-- calc_proc:
 	-- Calculate the new cell coordinates by moving from the original cell
 	---------------------------------------------------------------------------------------------------------
-	calc_proc: process(row_number_old, column_number_old)
+	calc_proc: process(row_number_old, column_number_old, move)
 	begin
 		case move is
 			when "0001" =>
