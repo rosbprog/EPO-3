@@ -15,12 +15,12 @@ architecture structural of speedcontroller is
 		); 
 	end component fsm_counter;
 
-	component counter is
+	component register_7bit is
 		port(	clk		: in	std_logic;
 			count_in		: in	std_logic_vector(6 downto 0);
 			c_rst		: in 	std_logic; 
 			count_out 		: out 	std_logic_vector(6 downto 0));
-	end component counter;
+	end component register_7bit;
 
 	component multiplexer is
 		port(	vc_done   : in  std_logic;
@@ -40,7 +40,8 @@ architecture structural of speedcontroller is
 	signal c_rst_int			: std_logic;			
 	
 begin
-LBL1: fsm_counter		port map(		clk 	=> clk,
+LBL1: fsm_counter		port map(		
+				clk 	=> clk,
 				reset 	=> reset,
 				p_rdy 	=> p_rdy,
 				g1_rdy	=> g_rdy,
@@ -52,19 +53,22 @@ LBL1: fsm_counter		port map(		clk 	=> clk,
 				g2_strt	=> g2_strt,
 				c_rst	=> c_rst_int		
 			);
-LBL2: counter		port map(		clk	=> clk,
+LBL2: register_7bit	port map(		
+				clk	=> clk,
 				count_in=> count_int2,
 				c_rst	=> c_rst_int,
 				count_out=> count_intern
 			);
 
-LBL3: multiplexer port map(				vc_done	=> vc_done,
+LBL3: multiplexer port map(				
+				vc_done		=> vc_done,
 				count_old	=> count_intern,
 				count_new	=> count_int3,
-				count 	=> count_intern
+				count 		=> count_intern
 			);
 
-LBL4: plus_one 		port map(		count_in	=> count_intern,
-				count_out=>	count_int3
+LBL4: plus_one 		port map(		
+				count_in	=> count_intern,
+				count_out	=> count_int3
 			);
 end architecture structural;
