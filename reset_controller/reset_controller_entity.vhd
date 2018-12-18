@@ -10,10 +10,9 @@ entity reset_controller is
 									--	thus a level reset occurs: set all signals
 									--	but the "score_counter_reset" signal to '1'.
 
-		input_controller_reset		: out	std_logic;	-- Output signal for resetting all input controllers
 		coin_register_reset		: out	std_logic;	-- Output signal for resetting the coin register
-		pacman_reset			: out	std_logic;
-		ghost1_reset			: out	std_logic;
-		ghost2_reset			: out	std_logic
+		pacman_reset			: out	std_logic;	-- Output signal for resetting the pacman system
+		ghost1_reset			: out	std_logic;	-- Output signal for resetting the ghost1 system
+		ghost2_reset			: out	std_logic	-- Output signal for resetting the ghost2 system
 	);
 end entity reset_controller;
