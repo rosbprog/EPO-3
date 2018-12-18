@@ -41,9 +41,9 @@ entity cell_register is
 		vc_done_out		: out std_logic;			-- Output signal, is set to '1' when the video controller gives
 										--	control back to the other components to access
 										--	to the registers (directly tied to vc_done_in)
-		vc_has_priority		: out std_logic				-- Output signal, is set to '1' when the video controller has
+		vc_has_priority		: out std_logic;			-- Output signal, is set to '1' when the video controller has
 										--	control of the registers (inverse of "vc_done_out")
 		score_pulse_out		: out std_logic;			-- Output signal, where a pulse represents an increment of the score
-		is_game_over_out	: out std_logic;			-- Output signal, when '1', the game is over
+		is_game_over_out	: out std_logic				-- Output signal, when '1', the game is over
 	);
 end entity cell_register;
