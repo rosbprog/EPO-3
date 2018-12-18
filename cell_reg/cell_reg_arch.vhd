@@ -4,6 +4,7 @@ begin
 	vc_done_out		<= vc_done_in;
 	vc_has_priority		<= not vc_done_in;
 	score_pulse_out		<= score_pulse_in;
+	score_reset_out		<= score_reset_in;
 	is_game_over_out	<= is_game_over_in;
 	row_number_out		<= row_number_requested;
 	column_number_out	<= column_number_requested;
