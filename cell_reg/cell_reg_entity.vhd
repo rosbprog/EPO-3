@@ -8,7 +8,8 @@ entity cell_register is
 		wall_present		: in std_logic;				-- Input signal, when '1', a wall is present in the requested cell
 		vc_done_in		: in std_logic;				-- Input signal, when '1', the video controller gives control back
 										--	to the other components to access the registers
-		score			: in std_logic_vector(9 downto 0);	-- Input bus which contains the score of the current game
+		score_pulse_in		: in std_logic;				-- Input signal, where a pulse represents an increment of the score
+		is_game_over_in		: in std_logic;				-- Input signal, when '1', the game is over
 
 		row_number_pacman	: in std_logic_vector(4 downto 0);	-- Input bus which contains the current row number of pacman
 		column_number_pacman	: in std_logic_vector(4 downto 0);	-- Input bus which contains the current column number of pacman
@@ -42,5 +43,7 @@ entity cell_register is
 										--	to the registers (directly tied to vc_done_in)
 		vc_has_priority		: out std_logic				-- Output signal, is set to '1' when the video controller has
 										--	control of the registers (inverse of "vc_done_out")
+		score_pulse_out		: out std_logic;			-- Output signal, where a pulse represents an increment of the score
+		is_game_over_out	: out std_logic;			-- Output signal, when '1', the game is over
 	);
 end entity cell_register;
