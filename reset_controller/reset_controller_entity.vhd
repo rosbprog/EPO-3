@@ -12,8 +12,8 @@ entity reset_controller is
 
 		input_controller_reset		: out	std_logic;	-- Output signal for resetting all input controllers
 		coin_register_reset		: out	std_logic;	-- Output signal for resetting the coin register
-		score_counter_reset		: out	std_logic;	-- Output signal for resetting the score counter
-		fsm_reset			: out	std_logic;	-- Output signal for resetting all FSMs
-		coordinate_register_reset	: out	std_logic	-- Output signal for restting all coordinate registers
+		pacman_reset			: out	std_logic;
+		ghost1_reset			: out	std_logic;
+		ghost2_reset			: out	std_logic
 	);
 end entity reset_controller;
