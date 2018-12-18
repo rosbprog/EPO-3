@@ -11,6 +11,7 @@ entity reset_controller is
 									--	but the "score_counter_reset" signal to '1'.
 
 		coin_register_reset		: out	std_logic;	-- Output signal for resetting the coin register
+		score_counter_reset		: out	std_logic;	-- Output signal for resetting the score counter
 		pacman_reset			: out	std_logic;	-- Output signal for resetting the pacman system
 		ghost1_reset			: out	std_logic;	-- Output signal for resetting the ghost1 system
 		ghost2_reset			: out	std_logic	-- Output signal for resetting the ghost2 system
