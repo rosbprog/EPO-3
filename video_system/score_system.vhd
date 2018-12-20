@@ -19,7 +19,8 @@ entity score_system is
 
 	en_county				: out std_logic;
 	en_current_block_horizontal				: out std_logic;
-	en_dual_pixel_y				: out std_logic
+	en_dual_pixel_y				: out std_logic;
+        score_12bits				: out std_logic_vector(11 downto 0)
 	);
 
 end score_system;
