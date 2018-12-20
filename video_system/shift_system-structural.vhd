@@ -25,8 +25,7 @@ component shift_control is
 	pacman_pos_y_new: out std_logic_vector(4 downto 0);
 	pacman_pos_load	 	: out std_logic;
 	pacman_pos_reset	 	: out std_logic;
-
-	shift_clock_reset: out std_logic;
+	shift_clock_reset  : out std_logic;
 
 	cell_state_out: out std_logic_vector(2 downto 0);
         y_pos_out     : out std_logic_vector(2 downto 0);
@@ -67,11 +66,11 @@ begin
 
 cntrl: shift_control port map(clk,
 	reset,
-	xcoordinates ,
-        ycoordinates ,
-        cell_state_in,
-        y_pos_in ,
-        pixel_arr_in ,
+	xcoordinates_shift ,
+        ycoordinates_shift ,
+        cell_state_in_shift,
+        y_pos_in_shift ,
+        pixel_arr_in_shift ,
 
 	pacman_pos_x,
 	pacman_pos_y,
@@ -86,9 +85,9 @@ cntrl: shift_control port map(clk,
 
 	shift_clock_reset,
 
-	cell_state_out,
-        y_pos_out,
-        pixel_arr_out);
+	cell_state_out_shift,
+        y_pos_out_shift,
+        pixel_arr_out_shift);
 
 cntr: shift_counter port map(clk, shift_clock_reset, screen_sync, shift_pulse);
 reg: pacman_position_reg port map(	pacman_pos_x_new,
@@ -97,7 +96,6 @@ reg: pacman_position_reg port map(	pacman_pos_x_new,
 	pacman_pos_reset, clk, 
 	pacman_pos_x,
 	pacman_pos_y);
-
 
 
 end structural;
