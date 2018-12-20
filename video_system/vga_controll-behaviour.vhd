@@ -87,7 +87,7 @@ L31:		process( hcount, vcount, in_h_sync, in_v_sync)
 			end if;
 			if (vcount = 480 and hcount = 0) then
 				new_calc_start <= '1';
-			elsif(vcount = 524 and hcount = 399) 
+			elsif(vcount = 524 and hcount = 399) then
 				new_calc_start <= '0';
 			else
 				new_calc_start<=in_calc_start;
