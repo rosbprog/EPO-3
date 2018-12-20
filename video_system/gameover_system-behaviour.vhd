@@ -233,7 +233,7 @@ case state is
 		reset_dual_pixel_y<='1';
 		reset_current_block_horizontal <= '1';
 		reset_county<='1';
-                reset_row<='0';
+                reset_row<='1';
 
 		en_county <= '0';
 		en_current_block_horizontal <= '0';
@@ -293,12 +293,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(0));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(0));
+		go_colour(1) <= ('1' and pixel_arr_buffer(0));
 		go_colour(2) <= '0';
 		end if;
 
@@ -322,12 +322,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(1));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(1));
+		go_colour(1) <= ('1' and pixel_arr_buffer(1));
 		go_colour(2) <= '0';
 		end if;
 
@@ -351,12 +351,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(2));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(2));
+		go_colour(1) <= ('1' and pixel_arr_buffer(2));
 		go_colour(2) <= '0';
 		end if;
 
@@ -380,12 +380,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(3));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(3));
+		go_colour(1) <= ('1' and pixel_arr_buffer(3));
 		go_colour(2) <= '0';
 		end if;
 
@@ -409,12 +409,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(4));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(4));
+		go_colour(1) <= ('1' and pixel_arr_buffer(4));
 		go_colour(2) <= '0';
 		end if;
 
@@ -438,12 +438,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(5));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(5));
+		go_colour(1) <= ('1' and pixel_arr_buffer(5));
 		go_colour(2) <= '0';
 		end if;
 
@@ -467,12 +467,12 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(6));
 		go_colour(1) <= '0';
 		go_colour(2) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
-		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(0) <= ('1' and pixel_arr_buffer(6));
+		go_colour(1) <= ('1' and pixel_arr_buffer(6));
 		go_colour(2) <= '0';
 		end if;
 
