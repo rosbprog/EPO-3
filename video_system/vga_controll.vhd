@@ -14,6 +14,7 @@ entity vga_controll is
         blue         : out std_logic;
         h_sync       : out std_logic;
         v_sync       : out std_logic;
-	calc_start	  : out std_logic);
+	calc_start   : out std_logic;
+       	go_pixel_sync: out std_logic);
 end vga_controll;
 
