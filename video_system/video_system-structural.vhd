@@ -187,7 +187,7 @@ signal	dual_pixel_y: std_logic;
 signal	current_block_horizontal, ycoordinates_internal, xcoordinates_internal: std_logic_vector(4 downto 0);
 signal	current_block_vertical :  std_logic_vector(4 downto 0);
 signal	reset_dual_pixel_y, reset_dual_pixel_y_score, reset_dual_pixel_y_video, reset_dual_pixel_y_go, reset_current_block_horizontal, reset_current_block_horizontal_score, reset_current_block_horizontal_video, reset_current_block_horizontal_go, reset_current_block_vertical, reset_county,reset_county_score, reset_county_video, reset_county_go, en_county, en_county_score, en_county_video, en_county_go, en_current_block_horizontal, en_current_block_horizontal_score, en_current_block_horizontal_video,en_current_block_horizontal_go, en_current_block_vertical, en_dual_pixel_y, en_dual_pixel_y_score, en_dual_pixel_y_video,en_dual_pixel_y_go: std_logic;	
-signal in_mux_sel, in_st_go_sel: std_logic;
+signal in_mux_sel, in_st_go_sel, user_begin: std_logic;
 signal in_score_12bits: std_logic_vector(11 downto 0);
 signal in_go_pixel_sync: std_logic;
 signal in_row_out: std_logic_vector(7 downto 0);
