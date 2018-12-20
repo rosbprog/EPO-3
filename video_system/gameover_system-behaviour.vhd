@@ -322,13 +322,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -351,13 +351,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -380,13 +380,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -409,13 +409,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -438,13 +438,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -467,13 +467,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -485,13 +485,13 @@ case state is
 		done4 <= '0';
 
      		if (row='0' AND start_go_sel='1') then
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		else
-		colour(0) <= ('1' and pixel_arr_buffer(7));
-		colour(1) <= ('1' and pixel_arr_buffer(7));
-		colour(2) <= '0';
+		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(1) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -547,9 +547,9 @@ case state is
 
 		go_sprite_type <= go_type;
 		go_y_pos <= county;
-		colour(0) <= '0';
-		colour(1) <= '0';
-		colour(2) <= '0';
+		go_colour(0) <= '0';
+		go_colour(1) <= '0';
+		go_colour(2) <= '0';
 		new_state <= reset_state;
 
 	end case;
