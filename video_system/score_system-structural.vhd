@@ -56,6 +56,7 @@ signal pixel_array : std_logic_vector( 7 downto 0);
 
 
 begin
+score_12bits <= score_c & score_b & score_a; 
 
 L1: score_sprite port map( score_y_pos, score_sprite_type, pixel_array);
 
