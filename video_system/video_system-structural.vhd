@@ -193,6 +193,7 @@ signal in_go_pixel_sync: std_logic;
 signal in_row_out: std_logic_vector(7 downto 0);
 signal in_go_colour, in_go_y_pos: std_logic_vector(2 downto 0);
 signal in_go_sprite_type: std_logic_vector(4 downto 0);
+signal rgb_out: std_logic_vector(2 downto 0);
 
 begin
 
@@ -206,7 +207,7 @@ sprites: sprite port map(y_pos_shifted, sprite_type_to_register, sprite_colour, 
 shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_internal, sprite_type_to_shift, y_pos_to_shift, pixel_array_to_shift, calc_start_internal, sprite_type_to_register, y_pos_shifted, pixel_array_shifted
 );
 
-vgacontrol: vga_controll port map(clk, reset, colour, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync);
+vgacontrol: vga_controll port map(clk, reset, rgb_out, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync);
 
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
