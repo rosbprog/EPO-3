@@ -15,16 +15,18 @@ architecture structural of game_struct_tb_static is
 			dir_pacman	: in	std_logic_vector(3 downto 0);
 			dir_ghost1	: in	std_logic_vector(3 downto 0);
 			dir_ghost2	: in	std_logic_vector(3 downto 0);
-			vc_done		: in	std_logic;
+			vc_done_in	: in	std_logic;
 			row_request	: in	std_logic_vector(4 downto 0);
 			col_request	: in	std_logic_vector(4 downto 0);
 			score_pulse	: out	std_logic;
-			score_reset	: out	std_logic;
-			cell_type	: out	std_logic_vector(2 downto 0);
+			score_reset_out	: out	std_logic;
+			game_over_out	: out	std_logic;
+			cell_type	: out	std_logic_vector(2 downto 0)
 		);
 	end component game_struct;
 
-	signal clk, reset, dir_pacman, vc_done, score_pulse, score_reset	: std_logic;
+	signal clk, reset, dir_pacman, vc_done_in, score_pulse,
+		score_reset_out, game_over_out					: std_logic;
 	signal dir_pacman, dir_ghost1, dir_ghost2				: std_logic_vector(3 downto 0);
 	signal row_request, col_request						: std_logic_vector(4 downto 0);
 	signal cell_type							: std_logic_vector(2 downto 0);
@@ -37,11 +39,12 @@ begin
 					dir_pacman	=> dir_pacman,
 					dir_ghost1	=> dir_ghost1,
 					dir_ghost2	=> dir_ghost2,
-					vc_done		=> vc_done,
+					vc_done_in	=> vc_done_in,
 					row_request	=> row_request,
 					col_request	=> col_request,
 					score_pulse	=> score_pulse,
-					score_reset	=> score_reset,
+					score_reset_out	=> score_reset_out,
+					game_over_out	=> game_over_out,
 					cell_type	=> cell_type
 				);
 
@@ -55,7 +58,7 @@ begin
 	dir_ghost1 <=	"0000" after 0 ns;
 	dir_ghost2 <=	"0000" after 0 ns;
 
-	vc_done <=	'0' after 0 ns,
+	vc_done_in <=	'0' after 0 ns,
 			'1' after 100 ns when vc_done /= '1' else '0' after 100 ns;
 
 	row_request <=	"01011" after 0 ns;	-- row 11
