@@ -34,6 +34,7 @@ component vga_controll is
    port(clk          : in  std_logic;
         reset        : in  std_logic;
         rgb          : in  std_logic_vector(2 downto 0);
+	enable_sync  : in std_logic;
         pixel_sync		 : out std_logic;
 	score_pixel_sync	 : out std_logic;
         red          : out std_logic;
@@ -42,7 +43,8 @@ component vga_controll is
         h_sync       : out std_logic;
         v_sync       : out std_logic;
 	calc_start   : out std_logic;
-        go_pixel_sync: out std_logic);
+        go_pixel_sync: out std_logic;
+        calc_start_game : out std_logic);
 end component vga_controll;
 
 component video_control is
@@ -187,7 +189,7 @@ signal	dual_pixel_y: std_logic;
 signal	current_block_horizontal, ycoordinates_internal, xcoordinates_internal: std_logic_vector(4 downto 0);
 signal	current_block_vertical :  std_logic_vector(4 downto 0);
 signal	reset_dual_pixel_y, reset_dual_pixel_y_score, reset_dual_pixel_y_video, reset_dual_pixel_y_go, reset_current_block_horizontal, reset_current_block_horizontal_score, reset_current_block_horizontal_video, reset_current_block_horizontal_go, reset_current_block_vertical, reset_county,reset_county_score, reset_county_video, reset_county_go, en_county, en_county_score, en_county_video, en_county_go, en_current_block_horizontal, en_current_block_horizontal_score, en_current_block_horizontal_video,en_current_block_horizontal_go, en_current_block_vertical, en_dual_pixel_y, en_dual_pixel_y_score, en_dual_pixel_y_video,en_dual_pixel_y_go: std_logic;	
-signal in_mux_sel, in_st_go_sel: std_logic;
+signal in_mux_sel, in_st_go_sel, in_calc_start_game: std_logic;
 signal in_score_12bits: std_logic_vector(11 downto 0);
 signal in_go_pixel_sync: std_logic;
 signal in_row_out: std_logic_vector(7 downto 0);
@@ -207,7 +209,7 @@ sprites: sprite port map(y_pos_shifted, sprite_type_to_register, sprite_colour, 
 shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_internal, sprite_type_to_shift, y_pos_to_shift, pixel_array_to_shift, calc_start_internal, sprite_type_to_register, y_pos_shifted, pixel_array_shifted
 );
 
-vgacontrol: vga_controll port map(clk, reset, rgb_out, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync);
+vgacontrol: vga_controll port map(clk, reset, rgb_out, in_st_go_sel, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync, in_calc_start_game);
 
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
@@ -237,7 +239,7 @@ en_county <= en_county_score OR en_county_video OR en_county_go;
 xcoordinates <= xcoordinates_internal;
 ycoordinates <= ycoordinates_internal;
 
-calc_start <= calc_start_internal;
+calc_start <= in_calc_start_game;
 
 process(xcoordinates_internal, ycoordinates_internal)
 
