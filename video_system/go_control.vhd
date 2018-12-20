@@ -14,7 +14,7 @@ entity gameover_control is
 	county				: in std_logic_vector(2 downto 0);
 	current_block_horizontal 				: in std_logic_vector(4 downto 0);
 
-	colour       				: out std_logic_vector(2 downto 0);
+	go_colour       				: out std_logic_vector(2 downto 0);
 	go_sprite_type				: out std_logic_vector(4 downto 0);
 	go_y_pos				: out std_logic_vector(2 downto 0);
 
