@@ -14,8 +14,8 @@ entity shift_system is
 	screen_sync	  : in std_logic;
 
 	cell_state_out_shift: out std_logic_vector(2 downto 0);
-        y_pos_out_shift     : out std_logic_vector(2 downto 0);
-        pixel_arr_out_shift : out std_logic_vector(7 downto 0)
+   y_pos_out_shift     : out std_logic_vector(2 downto 0);
+   pixel_arr_out_shift : out std_logic_vector(7 downto 0)
 
 );
 end shift_system;

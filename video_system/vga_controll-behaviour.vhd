@@ -5,7 +5,7 @@ use IEEE.numeric_std.all;
 architecture vga_behavioral of vga_controll is
 
 signal hcount, vcount, new_hcount, new_vcount: unsigned(9 downto 0);
-signal in_h_sync, in_v_sync, new_h_sync, new_v_sync, in_red, new_red, in_blue, new_blue, in_green, new_green, in_calc_start, new_calc_start: std_logic;
+signal in_h_sync, in_v_sync, new_h_sync, new_v_sync, in_red, new_red, in_blue, new_blue, in_green, new_green: std_logic;
 
 begin
 
@@ -20,7 +20,6 @@ L1:		process(clk, reset)
 				in_red <= '0';
 				in_green <= '0';
 				in_blue <= '0';
-				in_calc_start <='0';
 			else 
 				hcount <= new_hcount;
 				vcount <= new_vcount;
@@ -29,7 +28,6 @@ L1:		process(clk, reset)
 				in_red <= new_red;
 				in_green <= new_green;
 				in_blue <= new_blue;
-				in_calc_start <= new_calc_start;
 			end if;
 		end if;
 		end process; 
@@ -81,11 +79,9 @@ L31:		process( hcount, vcount, in_h_sync, in_v_sync)
 				pixel_sync <= '0';
 			end if;
 			if (vcount = 480 and hcount = 0) then
-				new_calc_start <= '1';
-			elsif(vcount = 524 and hcount = 399) 
-				new_calc_start <= '0';
-			else
-				new_calc_start <= in_calc_start;
+				calc_start <= '1';
+			else 
+				calc_start <= '0';
 			end if; 
 		end process;
 
@@ -107,12 +103,6 @@ L4:		process(hcount,vcount,rgb)
 		red <= in_red;
 		green <= in_green;
 		blue <= in_blue;
-		calc_start <= in_calc_start;
 		
 end architecture vga_behavioral;		
-
-
-
-
-
 

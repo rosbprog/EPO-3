@@ -81,7 +81,7 @@ component sprite is
 		);
 end component sprite;
 	
-component counter is
+component video_counter is
 
 	port(
 	clk				: in  std_logic;
@@ -124,9 +124,9 @@ end component;
 
 signal cell_type_test: std_logic_vector(2 downto 0);
 
-signal y_pos_to_shift, y_pos_shifted, sprite_type_to_shift, sprite_type_to_register, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
-signal sync, score_sync, calc_start_internal: std_logic;
-signal pixel_array_to_shift, pixel_array_shifted: std_logic_vector(7 downto 0);
+signal  y_pos_to_shift, y_pos_shifted, sprite_type_to_shift, sprite_type_to_register, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
+signal  sync, score_sync, calc_start_internal: std_logic;
+signal  pixel_array_to_shift, pixel_array_shifted: std_logic_vector(7 downto 0);
 signal	county:  std_logic_vector(2 downto 0);
 signal	dual_pixel_y: std_logic;
 signal	current_block_horizontal, ycoordinates_internal, xcoordinates_internal: std_logic_vector(4 downto 0);
@@ -147,7 +147,7 @@ shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_in
 
 vgacontrol: vga_controll port map(clk, reset, colour, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal);
 
-cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
+cnt: video_counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 			 en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 
@@ -175,10 +175,14 @@ process(xcoordinates_internal, ycoordinates_internal)
 
 begin
 
-	if((xcoordinates_internal = "01111" OR xcoordinates_internal = "10000" ) AND ycoordinates_internal = "01111") then
+	if(xcoordinates_internal = "01111" AND (ycoordinates_internal = "01111" OR ycoordinates_internal = "10000")) then
 		cell_type_test <= "001";
-	else
+	elsif((xcoordinates_internal = "01111" OR xcoordinates_internal = "10000") AND ycoordinates_internal = "01101" ) then
 		cell_type_test <= "010";
+	elsif((xcoordinates_internal = "01100" OR xcoordinates_internal = "01101") AND ycoordinates_internal = "01001" ) then
+		cell_type_test <= "011";
+	else
+		cell_type_test <= "110";
 	end if;
 end process;
 
