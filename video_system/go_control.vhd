@@ -6,6 +6,8 @@ entity gameover_control is
         reset     					: in std_logic;
         score					: in std_logic_vector(11 downto 0);
         gameover_sync_vga          					: in std_logic;
+		  game_over_sig			: in std_logic;
+		 
 
         start_go_sel					: in std_logic;
 	pixel_array				: in std_logic_vector(7 downto 0);

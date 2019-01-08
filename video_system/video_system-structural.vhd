@@ -141,6 +141,7 @@ component gameover_control is
         reset     					: in std_logic;
         score					: in std_logic_vector(11 downto 0);
         gameover_sync_vga          					: in std_logic;
+		  game_over_sig			: in std_logic;
 
         start_go_sel					: in std_logic;
 	pixel_array				: in std_logic_vector(7 downto 0);
@@ -209,7 +210,7 @@ sprites: sprite port map(y_pos_shifted, sprite_type_to_register, sprite_colour, 
 shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_internal, sprite_type_to_shift, y_pos_to_shift, pixel_array_to_shift, calc_start_internal, sprite_type_to_register, y_pos_shifted, pixel_array_shifted
 );
 
-vgacontrol: vga_controll port map(clk, reset, rgb_out, in_st_go_sel, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync, in_calc_start_game);
+vgacontrol: vga_controll port map(clk, reset, rgb_out, in_mux_sel, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync, in_calc_start_game);
 
 cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
@@ -217,11 +218,11 @@ cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, curr
 
 score: score_system port map( clk, reset, score_plus, score_sync, dual_pixel_y, county, current_block_horizontal, rgb_score, reset_dual_pixel_y_score, reset_current_block_horizontal_score, reset_county_score, en_county_score, en_current_block_horizontal_score, en_dual_pixel_y_score,in_score_12bits);
 	
-screencontrol: screen_controller port map(clk,reset,user_begin,in_mux_sel,in_st_go_sel);
+screencontrol: screen_controller port map(clk,reset,user_begin,game_over,in_mux_sel,in_st_go_sel);
 	
-gameovercontrol: gameover_control port map(clk,reset,in_score_12bits,in_go_pixel_sync,in_st_go_sel,in_row_out,dual_pixel_y, county, current_block_horizontal,in_go_colour,in_go_sprite_type,in_go_y_pos,reset_dual_pixel_y_go, reset_current_block_horizontal_go, reset_county_go, en_county_go, en_current_block_horizontal_go, en_dual_pixel_y_go);
+gameovercontrol: gameover_control port map(clk,reset,in_score_12bits,in_go_pixel_sync,game_over,in_st_go_sel,in_row_out,dual_pixel_y, county, current_block_horizontal,in_go_colour,in_go_sprite_type,in_go_y_pos,reset_dual_pixel_y_go, reset_current_block_horizontal_go, reset_county_go, en_county_go, en_current_block_horizontal_go, en_dual_pixel_y_go);
 	
-spirtego: character_sprite port map(in_go_y_pos,in_go_sprite_type,in_row_out);
+spirtego: character_sprite port map(in_go_y_pos,in_go_sprite_type,in_row_out); 
 
 colour(0)<= rgb_score(0) OR  rgb_video(0);
 colour(1)<= rgb_score(1) OR  rgb_video(1);

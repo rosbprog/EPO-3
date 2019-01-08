@@ -71,8 +71,8 @@ L31:		process( hcount, vcount, in_h_sync, in_v_sync)
 			end if;
 				
 				
-			if (enable_sync='0') then
-				go_pixel_sync='0';
+			if (enable_sync='1') then
+				go_pixel_sync<='0';
 				if(hcount=64 and (vcount >= 32 and vcount<=47)) then
 					score_pixel_sync <= '1';
 				else
@@ -84,9 +84,9 @@ L31:		process( hcount, vcount, in_h_sync, in_v_sync)
 					pixel_sync <= '0';
 				end if;
 			else
-				pixel_sync='0';
-				score_pixel_sync='0';
-				if(hcount=120 and (vcount >= 224 and vcount<=255)) then
+				pixel_sync<='0';
+				score_pixel_sync<='0';
+				if(hcount=64 and (vcount >= 224 and vcount<=255)) then
 					go_pixel_sync <= '1';
 				else
 					go_pixel_sync <= '0';

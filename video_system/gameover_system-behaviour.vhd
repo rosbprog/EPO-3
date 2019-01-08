@@ -79,7 +79,7 @@ end process;
 L21: process(score_a, score_b, score_c, current_block_horizontal, row, start_go_sel)
 begin
 	case current_block_horizontal is
-		when "01000" => 
+		when "00111" => 
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10101";
@@ -93,7 +93,7 @@ begin
 				new_go_type <=  "01010";
 				end if;
 			end if;
-		when "01001" =>
+		when "01000" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10110";
@@ -107,7 +107,7 @@ begin
 				new_go_type <=  "01011";
 				end if;
 			end if;
-		when "01010" =>
+		when "01001" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10001";
@@ -121,10 +121,10 @@ begin
 				new_go_type <=  "00000";
 				end if;
 			end if;
-		when "01011" =>
+		when "01010" =>
 			if(start_go_sel='0')then
 				if (row='0') then
-				new_go_type <=  "10111";
+				new_go_type <=  "01011";
 				else
 				new_go_type <=  "10011";
 				end if;				
@@ -135,7 +135,7 @@ begin
 				new_go_type <=  "01101";
 				end if;
 			end if;
-		when "01100" =>
+		when "01011" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "11000";
@@ -149,7 +149,7 @@ begin
 				new_go_type <=  "01110";
 				end if;
 			end if;
-		when "01101" =>
+		when "01100" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10010";
@@ -163,7 +163,7 @@ begin
 				new_go_type <=  "01111";
 				end if;
 			end if;
-		when "01110" =>
+		when "01101" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10001";
@@ -177,7 +177,7 @@ begin
 				new_go_type <=  score_c;
 				end if;
 			end if;
-		when "01111" =>		
+		when "01110" =>		
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10111";
@@ -191,7 +191,7 @@ begin
 				new_go_type <=  score_b;
 				end if;
 			end if;
-		when "10000" =>
+		when "01111" =>
 			if(start_go_sel='0')then
 				if (row='0') then
 				new_go_type <=  "10101";
@@ -214,7 +214,7 @@ end process;
 L3: process(clk, reset)
 begin
 	if(clk'event and clk = '1') then
-		if reset = '1' then
+		if reset = '1' or game_over_sig='1' then
 			state<= reset_state;
 		else
 			state<= new_state;
@@ -222,7 +222,7 @@ begin
 	end if;
 end process;
 
-L31: process(gameover_sync_vga, go_type, pixel_array, state, county, current_block_horizontal, dual_pixel_y, pixel_arr_buffer, row)
+L31: process(gameover_sync_vga, go_type, pixel_array, state, county, current_block_horizontal, dual_pixel_y, pixel_arr_buffer, row,start_go_sel)
 begin
 case state is
 	when reset_state  =>
@@ -233,7 +233,7 @@ case state is
 		reset_dual_pixel_y<='1';
 		reset_current_block_horizontal <= '1';
 		reset_county<='1';
-                reset_row<='1';
+      reset_row<='1';
 
 		en_county <= '0';
 		en_current_block_horizontal <= '0';
@@ -293,13 +293,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(0));
+		go_colour(2) <= ('1' and pixel_arr_buffer(0));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(0));
+		go_colour(2) <= ('1' and pixel_arr_buffer(0));
 		go_colour(1) <= ('1' and pixel_arr_buffer(0));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -322,13 +322,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(1));
+		go_colour(2) <= ('1' and pixel_arr_buffer(1));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(1));
+		go_colour(2) <= ('1' and pixel_arr_buffer(1));
 		go_colour(1) <= ('1' and pixel_arr_buffer(1));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -351,13 +351,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(2));
+		go_colour(2) <= ('1' and pixel_arr_buffer(2));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(2));
+		go_colour(2) <= ('1' and pixel_arr_buffer(2));
 		go_colour(1) <= ('1' and pixel_arr_buffer(2));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -380,13 +380,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(3));
+		go_colour(2) <= ('1' and pixel_arr_buffer(3));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(3));
+		go_colour(2) <= ('1' and pixel_arr_buffer(3));
 		go_colour(1) <= ('1' and pixel_arr_buffer(3));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -409,13 +409,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(4));
+		go_colour(2) <= ('1' and pixel_arr_buffer(4));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(4));
+		go_colour(2) <= ('1' and pixel_arr_buffer(4));
 		go_colour(1) <= ('1' and pixel_arr_buffer(4));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -438,13 +438,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(5));
+		go_colour(2) <= ('1' and pixel_arr_buffer(5));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(5));
+		go_colour(2) <= ('1' and pixel_arr_buffer(5));
 		go_colour(1) <= ('1' and pixel_arr_buffer(5));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -467,13 +467,13 @@ case state is
 		en_row<='0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(6));
+		go_colour(2) <= ('1' and pixel_arr_buffer(6));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(6));
+		go_colour(2) <= ('1' and pixel_arr_buffer(6));
 		go_colour(1) <= ('1' and pixel_arr_buffer(6));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;
@@ -485,13 +485,13 @@ case state is
 		done4 <= '0';
 
      		if (row='0' AND start_go_sel='1') then
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= ('1' and pixel_arr_buffer(7));
 		go_colour(1) <= '0';
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		else
-		go_colour(0) <= ('1' and pixel_arr_buffer(7));
+		go_colour(2) <= ('1' and pixel_arr_buffer(7));
 		go_colour(1) <= ('1' and pixel_arr_buffer(7));
-		go_colour(2) <= '0';
+		go_colour(0) <= '0';
 		end if;
 
 		go_sprite_type <= go_type;

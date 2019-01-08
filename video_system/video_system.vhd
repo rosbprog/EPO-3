@@ -9,6 +9,7 @@ entity video_system is
         cell_type : in std_logic_vector(2 downto 0);
 	score_plus : in std_logic;
        	user_begin : in std_logic;
+			game_over: in std_logic;
         xcoordinates : out std_logic_vector(4 downto 0);
         ycoordinates : out std_logic_vector(4 downto 0);
         red       : out std_logic;
