@@ -3,8 +3,11 @@ Ik heb even een tweede mapje gemaakt omdat ik zometeen nog even de andere wil be
 
 Deze map bevat:
 
-testbench
-FSM speedcontroller
-adder (telt één op bij huidige count)
-multiplexer
-7 bit register
+testbench,
+FSM speedcontroller,
+adder (telt één op bij huidige count),
+multiplexer,
+7 bit register,
+en een structural om alles samen te voegen
+
+Dimme
