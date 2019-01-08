@@ -13,7 +13,7 @@ begin
 		end if;
 	end process;
 	
-	process(clk, state, move_in)
+	process(clk)
 	begin
 		case state is
 			when start_s =>

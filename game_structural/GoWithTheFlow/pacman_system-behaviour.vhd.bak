@@ -76,15 +76,8 @@ architecture structural of pacman_system is
 	signal en_new_coord	: std_logic;
 	signal move		: std_logic_vector(3 downto 0);
 	signal row_number_muxxed, column_number_muxxed	: std_logic_vector(4 downto 0);
-	signal int_old_row, int_old_col : std_logic_vector (4 downto 0);
-	signal int_new_row, int_new_col : std_logic_vector (4 downto 0);
 
 begin
-
-	row_number_old <= int_old_row;
-	column_number_old <= int_old_col;
-	row_number_new <= int_new_row;
-	column_number_new <= int_new_col;
 
 	PC1: pacman_cont	port map (
 						clk		=> clk,
@@ -101,20 +94,20 @@ begin
 
 	CM1: coordinate_multiplexer	port map (
 							sel			=> en_new_coord,
-							row_number_in1		=> int_old_row,
-							column_number_in1	=> int_old_col,
-							row_number_in2		=> int_new_row,
-							column_number_in2	=> int_new_col,
+							row_number_in1		=> row_number_old,
+							column_number_in1	=> column_number_old,
+							row_number_in2		=> row_number_new,
+							column_number_in2	=> column_number_new,
 							row_number_out		=> row_number_muxxed,
 							column_number_out	=> column_number_muxxed
 						);
 
 	CA1: coordinate_adder	port map (
 						move			=> move,
-						row_number_old		=> int_old_row,
-						column_number_old	=> int_old_col,
-						row_number_new		=> int_new_row,
-						column_number_new	=> int_new_col
+						row_number_old		=> row_number_old,
+						column_number_old	=> column_number_old,
+						row_number_new		=> row_number_new,
+						column_number_new	=> column_number_new
 					);
 
 	CR1: coordinate_register	port map (
@@ -124,8 +117,8 @@ begin
 							column_number_reset	=> column_number_reset,
 							row_number_in		=> row_number_muxxed,
 							column_number_in	=> column_number_muxxed,
-							row_number_out		=> int_old_row,
-							column_number_out	=> int_old_col
+							row_number_out		=> row_number_old,
+							column_number_out	=> column_number_old
 						);
 
 	IS1: input_system	port map (

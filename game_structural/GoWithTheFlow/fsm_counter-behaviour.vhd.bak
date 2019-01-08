@@ -24,7 +24,7 @@ begin
 		end if;
 	end process;
 
-	process(p_rdy, g1_rdy, count, state)
+	process(p_rdy, g1_rdy, count)
 
 	begin
 

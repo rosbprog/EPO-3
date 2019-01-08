@@ -164,15 +164,15 @@ Label_col_reset_g2:        col_reset_ghost2  <= "01100";
 
 Label_reset:        reset_int <= reset or pacman_dead;
 
-L0: cell_register port map (coin_present, pos_is_wall, vc_done_in, score_add, score_reset, game_over, row_old_pacman, col_old_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, row_request, col_request, row_request_int, col_request_int, cell_type, vc_done, vc_has_priority, score_pulse, score_reset_out, game_over_out);
+L0: cell_register port map (coin_present, pos_is_wall, vc_done_in, score_add, score_reset, pacman_dead, row_old_pacman, col_old_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, row_request, col_request, row_request_int, col_request_int, cell_type, vc_done, vc_has_priority, score_pulse, score_reset_out, game_over_out);
 
 L1a: coin_register port map (clk, coin_register_reset, write_coin, row_coin, col_coin, coin_present, score_add, zero_coins);
 L1b: coordinate_multiplexer port map (vc_has_priority, row_new_pacman, col_new_pacman, row_request_int, col_request_int, row_coin, col_coin);
 
-L2: deathcontroller port map (row_new_pacman, col_new_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, game_over);
+L2: deathcontroller port map (row_new_pacman, col_new_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, pacman_dead);
 
-L3a: ghost_struct port map (clk, ghost1_reset, pos_is_wall, ghost1_start, dir_ghost1, row_old_ghost1, col_old_ghost1, row_new_ghost1, col_new_ghost1, row_reset_ghost1, col_reset_ghost1, ghost1_map_select, ghost1_ready);
-L3b: ghost_struct port map (clk, ghost2_reset, pos_is_wall, ghost2_start, dir_ghost2, row_old_ghost2, col_old_ghost2, row_new_ghost2, col_new_ghost2, row_reset_ghost2, col_reset_ghost2, ghost2_map_select, ghost2_ready);
+L3a: ghost_struct port map (clk, ghost1_reset, pos_is_wall, ghost1_start, dir_ghost1, row_old_ghost1, col_old_ghost1, row_new_ghost1, col_new_ghost1, "01011", "01011", ghost1_map_select, ghost1_ready);
+L3b: ghost_struct port map (clk, ghost2_reset, pos_is_wall, ghost2_start, dir_ghost2, row_old_ghost2, col_old_ghost2, row_new_ghost2, col_new_ghost2, "01100", "01100", ghost2_map_select, ghost2_ready);
 L3c: pacman_system port map (clk, pacman_reset, row_old_pacman, col_old_pacman, row_new_pacman, col_new_pacman, row_reset_pacman, col_reset_pacman, dir_pacman, pacman_start, pos_is_wall, pacman_dead, game_over, pacman_ready, write_coin, pacman_map_select);
 
 L4a: map_register port map (row_map, col_map, pos_is_wall);
