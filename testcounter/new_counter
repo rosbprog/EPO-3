@@ -19,9 +19,9 @@ lbl0: count <= new_count;
 
 process(clk, count_reset, vc_done)
 begin
-  if(rising_edge(clk)) then
+  if(rising_edge(vc_done)) then
     if(count_reset = '1') then
-      count <= "0000000";
+      new_count <= "0000000";
     else
       if(rising_edge(vc_done)) then
 	new_count <= count + 1;
@@ -34,7 +34,7 @@ end process;
 
 process(count)
 begin
-  if(count = "0111100") then
+  if(count > "0111100") then
     sixty <= '1';
   else
     sixty <= '0';
