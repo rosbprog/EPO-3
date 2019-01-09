@@ -11,15 +11,18 @@ architecture behaviour of testbench is
 	port(	clk		: in	std_logic;
 		count_reset	: in 	std_logic; 
 		vc_done		: in	std_logic;
-		sixty		: out	std_logic);
+		forty		: out	std_logic;
+		sixty		: out	std_logic;
+		eighty		: out 	std_logic;
+		hundredandtwenty: out	std_logic);
   end component;
 
-signal clk, count_reset, vc_done, sixty : std_logic;
+signal clk, count_reset, vc_done, forty, sixty, eighty, hundredandtwenty : std_logic;
  
 begin
 
 clk <= '0' after 0 ns, '1' after 5 ns when clk /= '1' else '0' after 5 ns;
-count_reset <= '1' after 0 ns, '0' after 20 ns;
+count_reset <= '1' after 0 ns, '0' after 50 ns;
 vc_done <= '0' after 0 ns, '1' after 20 ns when clk /= '1' else '0' after 20 ns;
 
 lbl1: new_counter port map (clk, count_reset, vc_done, sixty);
