@@ -1,0 +1,44 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_unsigned.all;
+
+entity new_counter is
+	port(	clk		: in	std_logic;
+		count_reset	: in 	std_logic; 
+		vc_done		: in	std_logic;
+		sixty		: out	std_logic);
+end entity new_counter;
+
+architecture behaviour of new_counter is
+
+signal count, new_count : std_logic_vector (6 downto 0);
+
+begin
+
+lbl0: count <= new_count;
+
+process(clk, count_reset, vc_done)
+begin
+  if(rising_edge(clk)) then
+    if(count_reset = '1') then
+      count <= "0000000";
+    else
+      if(rising_edge(vc_done)) then
+	new_count <= count + 1;
+      else
+	new_count <= count;
+      end if;
+    end if;
+  end if;
+end process;
+
+process(count)
+begin
+  if(count = "0111100") then
+    sixty <= '1';
+  else
+    sixty <= '0';
+  end if;
+end process;
+
+end architecture;
