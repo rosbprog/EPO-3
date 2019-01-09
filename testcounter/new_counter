@@ -6,7 +6,10 @@ entity new_counter is
 	port(	clk		: in	std_logic;
 		count_reset	: in 	std_logic; 
 		vc_done		: in	std_logic;
-		sixty		: out	std_logic);
+		forty		: out	std_logic;
+		sixty		: out	std_logic;
+		eighty		: out	std_logic;
+		hundredandtwenty		: out	std_logic);
 end entity new_counter;
 
 architecture behaviour of new_counter is
@@ -34,10 +37,28 @@ end process;
 
 process(count)
 begin
+  if(count > "0101000") then
+    forty <= '1';
+  else
+    forty <= '0';
+  end if;
+
   if(count > "0111100") then
     sixty <= '1';
   else
     sixty <= '0';
+  end if;
+
+  if(count > "1010000") then
+    eighty <= '1';
+  else
+    eighty <= '0';
+  end if;
+
+  if(count > "1111000") then
+    hundredandtwenty <= '1';
+  else
+    hundredandtwenty <= '0';
   end if;
 end process;
 
