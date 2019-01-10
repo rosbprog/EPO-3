@@ -134,6 +134,7 @@ component screen_controller is
 	reset	  : in std_logic;
         user      : in std_logic;
         game_over : in std_logic;
+	calc_start_in : in std_logic;
         mux_sel   : out std_logic;
         st_go_sel : out std_logic
 	);
@@ -221,7 +222,7 @@ cnt: video_counter port map( clk, county, dual_pixel_y, current_block_horizontal
 
 score: score_system port map( clk, reset, score_plus, score_sync, dual_pixel_y, county, current_block_horizontal,user_begin, rgb_score, reset_dual_pixel_y_score, reset_current_block_horizontal_score, reset_county_score, en_county_score, en_current_block_horizontal_score, en_dual_pixel_y_score,in_score_12bits);
 	
-screencontrol: screen_controller port map(clk,reset,user_begin,game_over,in_mux_sel,in_st_go_sel);
+screencontrol: screen_controller port map(clk,reset,user_begin,game_over,calc_start_internal,in_mux_sel,in_st_go_sel);
 	
 gameovercontrol: gameover_control port map(clk,reset,in_score_12bits,in_go_pixel_sync,game_over,in_st_go_sel,in_row_out,dual_pixel_y, county, current_block_horizontal,in_go_colour,in_go_sprite_type,in_go_y_pos,reset_dual_pixel_y_go, reset_current_block_horizontal_go, reset_county_go, en_county_go, en_current_block_horizontal_go, en_dual_pixel_y_go);
 	
