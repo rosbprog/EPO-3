@@ -34,7 +34,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '1';
 		shift_clock_reset <= '1';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;	
 		new_state<= wait_state;
@@ -44,7 +44,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '1';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -111,17 +111,17 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 -- pacman shifted to the right, so for xcoordinates = pacman_pos_x - 1, that block should have pacman shifted to the right
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		--shift to the right when at the previous block
-			cell_state_out<= "001" ;
+			cell_state_out<= "000001" ;
 			pixel_arr_out <= ('0' & pixel_arr_in(7 downto 1));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			-- shift tot the left when at the new block
-			cell_state_out<="001";
+			cell_state_out<="000001";
 			pixel_arr_out <= (pixel_arr_in(0) & "0000000");
 		end if;
 			
@@ -139,15 +139,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "000001" ;
 			pixel_arr_out <= ("00" & pixel_arr_in(7 downto 2));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="000001";
 			pixel_arr_out <= (pixel_arr_in(1 downto 0) & "000000");
 		end if;
 			
@@ -167,10 +167,10 @@ case state is
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "000001" ;
 			pixel_arr_out <= ("000" & pixel_arr_in(7 downto 3));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="000001";
 			pixel_arr_out <= (pixel_arr_in(2 downto 0) & "00000");
 		end if;
 			
@@ -186,15 +186,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "100001" ;
 			pixel_arr_out <= ("0000" & pixel_arr_in(7 downto 4));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="100001";
 			pixel_arr_out <= (pixel_arr_in(3 downto 0) & "0000");
 		end if;
 			
@@ -209,15 +209,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "100001" ;
 			pixel_arr_out <= ("00000" & pixel_arr_in(7 downto 5));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="100001";
 			pixel_arr_out <= (pixel_arr_in(4 downto 0) & "000");
 		end if;
 			
@@ -232,15 +232,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "100001" ;
 			pixel_arr_out <= ("000000" & pixel_arr_in(7 downto 6));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="100001";
 			pixel_arr_out <= (pixel_arr_in(5 downto 0) & "00");
 		end if;
 			
@@ -255,15 +255,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x - 1) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "100001" ;
 			pixel_arr_out <= ("0000000" & pixel_arr_in(7));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then			
-			cell_state_out<="001";
+			cell_state_out<="100001";
 			pixel_arr_out <= (pixel_arr_in(6 downto 0) & "0");
 		end if;
 			
@@ -281,17 +281,17 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 -- pacman shifted to the left, so for xcoordinates = pacman_pos_x + 1, that block should have pacman shifted to the left
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		--shift to the right when at the new block
-			cell_state_out<= "001" ;
+			cell_state_out<= "010001" ;
 			pixel_arr_out <= ("0000000" & pixel_arr_in(7));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			-- shift tot the left when at the previous block
-			cell_state_out<="001";
+			cell_state_out<="010001";
 			pixel_arr_out <= (pixel_arr_in(6 downto 0) & "0");
 		end if;
 			
@@ -309,15 +309,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "010001" ;
 			pixel_arr_out <= ("000000" & pixel_arr_in(7 downto 6));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="010001";
 			pixel_arr_out <= (pixel_arr_in(5 downto 0) & "00");
 		end if;
 			
@@ -333,15 +333,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "010001" ;
 			pixel_arr_out <= ("00000" & pixel_arr_in(7 downto 5));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="010001";
 			pixel_arr_out <= (pixel_arr_in(4 downto 0) & "000");
 		end if;
 			
@@ -357,15 +357,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "110001" ;
 			pixel_arr_out <= ("0000" & pixel_arr_in(7 downto 4));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="110001";
 			pixel_arr_out <= (pixel_arr_in(3 downto 0) & "0000");
 		end if;
 			
@@ -381,15 +381,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "110001" ;
 			pixel_arr_out <= ("000" & pixel_arr_in(7 downto 3));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="110001";
 			pixel_arr_out <= (pixel_arr_in(2 downto 0) & "00000");
 		end if;
 			
@@ -405,15 +405,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "110001" ;
 			pixel_arr_out <= ("00" & pixel_arr_in(7 downto 2));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="110001";
 			pixel_arr_out <= (pixel_arr_in(1 downto 0) & "000000");
 		end if;
 			
@@ -429,15 +429,15 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 
 		if (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x) then		
-			cell_state_out<= "001" ;
+			cell_state_out<= "110001" ;
 			pixel_arr_out <= ("0" & pixel_arr_in(7 downto 1));
 		elsif (ycoordinates = pacman_pos_y) AND (xcoordinates = pacman_pos_x + 1) then			
-			cell_state_out<="001";
+			cell_state_out<="110001";
 			pixel_arr_out <= (pixel_arr_in(0) & "0000000");
 		end if;
 			
@@ -457,7 +457,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -467,14 +467,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 1;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "001" then -- if the y_pos is 7, this means that that specific row should be all zero's, because pacman is shifted up. 
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 7;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -489,7 +489,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -499,14 +499,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 2;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "010" then -- if the y_pos >= 6, this means that those specific rows should be all zero's, because pacman is shifted up. 
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 6;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -522,7 +522,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -532,14 +532,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 3;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "011" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 5;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "001001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -554,7 +554,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -564,14 +564,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 4;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "100" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 4;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -586,7 +586,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -596,14 +596,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 5;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "101" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 3;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -618,7 +618,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -628,14 +628,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 6;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		elsif ycoordinates = pacman_pos_y AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "110" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 2;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -650,7 +650,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -660,14 +660,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 7;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		elsif (ycoordinates = pacman_pos_y) AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "111" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 1;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "101001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -684,7 +684,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -694,14 +694,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 7;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then  -- previous block, so pacman should be shifted upwards
 			if y_pos_in >= "111" then -- if the y_pos is 7, this means that that specific row should be all zero's, because pacman is shifted up. 
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 1;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -716,7 +716,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -726,14 +726,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 6;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then  -- previous block, so pacman should be shifted upwards
 			if y_pos_in >= "110" then -- if the y_pos >= 6, this means that those specific rows should be all zero's, because pacman is shifted up. 
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 2;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -749,7 +749,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -759,14 +759,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 5;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "101" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 3;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "011001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -781,7 +781,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -791,14 +791,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 4;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "100" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 4;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -813,7 +813,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -823,14 +823,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 3;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "011" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 5;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -845,7 +845,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -855,14 +855,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 2;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		elsif (ycoordinates = pacman_pos_y + 1)  AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "010" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 6;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		end if;
 
 		if shift_pulse = '1' then
@@ -877,7 +877,7 @@ case state is
 		pacman_pos_load <= '0';
 		pacman_pos_reset <= '0';
 		shift_clock_reset <= '0';
-		cell_state_out<=cell_state_in;
+		cell_state_out<="000" & cell_state_in;
 		y_pos_out<=y_pos_in;
 		pixel_arr_out<=pixel_arr_in;
 		
@@ -887,14 +887,14 @@ case state is
 			else 
 				y_pos_out <= y_pos_in - 1;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		elsif (ycoordinates = pacman_pos_y + 1) AND xcoordinates = pacman_pos_x then
 			if y_pos_in >= "001" then
 				pixel_arr_out<="00000000";
 			else
 				y_pos_out <= y_pos_in + 7;
 			end if;
-			cell_state_out<= "001" ;
+			cell_state_out<= "111001" ;
 		end if;
 
 		if shift_pulse = '1' then
