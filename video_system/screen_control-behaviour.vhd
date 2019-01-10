@@ -6,7 +6,7 @@ architecture behavioural of screen_controller is
 
 type statetype is (start_state, game_state, pre_game_over_state, game_over_state);
 signal state,next_state : statetype;
-signal go, new_go, reset_go,en_go: std_logic;
+signal go, new_go, reset_go,en_go,switch_screen_reset_in: std_logic;
 
 begin
 
@@ -52,17 +52,17 @@ end process;
 		  
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
-	  switch_screen_reset<='1';
+	  switch_screen_reset_in<='1';
         else
           next_state <= start_state;
-	  switch_screen_reset<='0';
+	  switch_screen_reset_in<='0';
         end if;
 		
       when game_state =>
         mux_sel     <= '1';
         st_go_sel   <= '0';
 	reset_go<='0';
-	switch_screen_reset<='0';
+	switch_screen_reset_in<='0';
 	
         if (game_over = '1') then
           next_state <= pre_game_over_state;
@@ -80,10 +80,10 @@ end process;
 
  	if (go = '1' and calc_start_in='1') then
           next_state <= game_over_state;
-	  switch_screen_reset<='1';
+	  switch_screen_reset_in<='1';
         else
           next_state <= pre_game_over_state;
-	  switch_screen_reset<='0';
+	  switch_screen_reset_in<='0';
         end if;			
 	
       when game_over_state =>
@@ -94,12 +94,13 @@ end process;
 
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
-	  switch_screen_reset<='1';
+	  switch_screen_reset_in<='1';
         else
           next_state <= game_over_state;
-	  switch_screen_reset<='0';
+	  switch_screen_reset_in<='0';
         end if;
     end case;
   end process;
 
+	 switch_screen_reset<=switch_screen_reset_in;
 end architecture behavioural;
