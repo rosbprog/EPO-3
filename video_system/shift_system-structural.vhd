@@ -122,7 +122,7 @@ component shift_control is
 	pacman_pos_reset	 	: out std_logic;
 	shift_clock_reset  : out std_logic;
 
-	cell_state_out: out std_logic_vector(2 downto 0);
+	cell_state_out: out std_logic_vector(5 downto 0);
         y_pos_out     : out std_logic_vector(2 downto 0);
         pixel_arr_out : out std_logic_vector(7 downto 0));
 end component;
