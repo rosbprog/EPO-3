@@ -52,14 +52,17 @@ end process;
 		  
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
+	  switch_screen_reset<='1';
         else
           next_state <= start_state;
+	  switch_screen_reset<='0';
         end if;
 		
       when game_state =>
         mux_sel     <= '1';
         st_go_sel   <= '0';
 	reset_go<='0';
+	switch_screen_reset<='0';
 	
         if (game_over = '1') then
           next_state <= pre_game_over_state;
@@ -77,8 +80,10 @@ end process;
 
  	if (go = '1' and calc_start_in='1') then
           next_state <= game_over_state;
+	  switch_screen_reset<='1';
         else
           next_state <= pre_game_over_state;
+	  switch_screen_reset<='0';
         end if;			
 	
       when game_over_state =>
@@ -89,8 +94,10 @@ end process;
 
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
+	  switch_screen_reset<='1';
         else
           next_state <= game_over_state;
+	  switch_screen_reset<='0';
         end if;
     end case;
   end process;
