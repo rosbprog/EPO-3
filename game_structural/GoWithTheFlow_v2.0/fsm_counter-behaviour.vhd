@@ -14,10 +14,10 @@ begin
 	process(clk, reset, coin_rst)
 	begin
 		if (rising_edge (clk)) then  --synchronous (two way)reset
-			if (reset = '0' AND coin_rst = '1') then --pac man moves slow
+			if (reset = '1') then --AND coin_rst = '1') then --pac man moves slow
 				state <= reset_s;
-			elsif (reset = '1') then		--pac man moves fast		
-				state <= reset_f;
+			--elsif (reset = '1') then		--pac man moves fast		
+			--	state <= reset_f;
 			else
 				state <= new_state;
 			end if;
@@ -183,7 +183,7 @@ begin
 				g1_strt	<= '0';
 				g2_strt <= '0';
 				c_rst	<= '0';
-				if( p_rdy = '1' and g1_rdy = '0' and (( eighty = '1'	and forty = '1') or (hundredandtwenty = '1' and eighty = '1')) ) then
+				if( p_rdy = '1' and g1_rdy = '0' and eighty = '1') then
 					new_state <= start_f;
 				else
 					new_state <= pause_3;
