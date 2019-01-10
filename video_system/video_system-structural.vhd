@@ -13,6 +13,7 @@ architecture structural of video_system is
    	   	dual_pixel_y				: in std_logic;
    		county				: in std_logic_vector(2 downto 0);
    		current_block_horizontal 				: in std_logic_vector(4 downto 0);
+					user_reset_scoresystem									: in std_logic;
    
    		rgb_score       				: out std_logic_vector(2 downto 0);
    
@@ -24,6 +25,7 @@ architecture structural of video_system is
    		en_current_block_horizontal				: out std_logic;
    		en_dual_pixel_y				: out std_logic;
 	 	score_12bits				: out std_logic_vector(11 downto 0)
+
    	);
    
    end component;
@@ -73,7 +75,8 @@ component video_control is
 	en_county				: out std_logic;
 	en_current_block_horizontal				: out std_logic;
 	en_current_block_vertical				: out std_logic;
-	en_dual_pixel_y				: out std_logic
+	en_dual_pixel_y				: out std_logic;
+	user_reset									: in std_logic
        );
 end component video_control;
 
@@ -85,7 +88,7 @@ component sprite is
 		);
 end component sprite;
 	
-component counter is
+component video_counter is
 
 	port(
 	clk				: in  std_logic;
@@ -203,7 +206,7 @@ begin
 vidcontrol: video_control port map(clk, reset, sync, cell_type_test, sprite_colour, pixel_array_shifted, sprite_type_to_shift, y_pos_to_shift, rgb_video, xcoordinates_internal, ycoordinates_internal,
 				  county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 				  reset_dual_pixel_y_video, reset_current_block_horizontal_video, reset_current_block_vertical, reset_county_video,
-				  en_county_video, en_current_block_horizontal_video, en_current_block_vertical, en_dual_pixel_y_video);
+				  en_county_video, en_current_block_horizontal_video, en_current_block_vertical, en_dual_pixel_y_video,user_begin);
 
 sprites: sprite port map(y_pos_shifted, sprite_type_to_register, sprite_colour, pixel_array_to_shift);
 
@@ -212,11 +215,11 @@ shift: shift_system port map (clk, reset, xcoordinates_internal, ycoordinates_in
 
 vgacontrol: vga_controll port map(clk, reset, rgb_out, in_mux_sel, sync, score_sync, red, green, blue, h_sync, v_sync, calc_start_internal, in_go_pixel_sync, in_calc_start_game);
 
-cnt: counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
+cnt: video_counter port map( clk, county, dual_pixel_y, current_block_horizontal, current_block_vertical, 
 			 reset_dual_pixel_y, reset_current_block_horizontal, reset_current_block_vertical, reset_county,
 			 en_county, en_current_block_horizontal, en_current_block_vertical, en_dual_pixel_y);
 
-score: score_system port map( clk, reset, score_plus, score_sync, dual_pixel_y, county, current_block_horizontal, rgb_score, reset_dual_pixel_y_score, reset_current_block_horizontal_score, reset_county_score, en_county_score, en_current_block_horizontal_score, en_dual_pixel_y_score,in_score_12bits);
+score: score_system port map( clk, reset, score_plus, score_sync, dual_pixel_y, county, current_block_horizontal,user_begin, rgb_score, reset_dual_pixel_y_score, reset_current_block_horizontal_score, reset_county_score, en_county_score, en_current_block_horizontal_score, en_dual_pixel_y_score,in_score_12bits);
 	
 screencontrol: screen_controller port map(clk,reset,user_begin,game_over,in_mux_sel,in_st_go_sel);
 	
@@ -246,10 +249,14 @@ process(xcoordinates_internal, ycoordinates_internal)
 
 begin
 
-	if((xcoordinates_internal = "01111" OR xcoordinates_internal = "10000" ) AND ycoordinates_internal = "01111") then
+	if(xcoordinates_internal = "01111" AND (ycoordinates_internal = "01111" OR ycoordinates_internal = "10000")) then
 		cell_type_test <= "001";
-	else
+	elsif((xcoordinates_internal = "01111" OR xcoordinates_internal = "10000") AND ycoordinates_internal = "01101" ) then
 		cell_type_test <= "010";
+	elsif((xcoordinates_internal = "01100" OR xcoordinates_internal = "01101") AND ycoordinates_internal = "01001" ) then
+		cell_type_test <= "011";
+	else
+		cell_type_test <= "110";
 	end if;
 end process;
 

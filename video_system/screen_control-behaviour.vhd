@@ -6,8 +6,30 @@ architecture behavioural of screen_controller is
 
 type statetype is (start_state, game_state, game_over_state);
 signal state,next_state : statetype;
+signal go, new_go, reset_go,en_go: std_logic;
 
 begin
+
+l1234: process(clk, reset_go)
+begin
+	if(clk'event and clk = '1') then
+		if (reset_go = '1') then
+			go <= '0';
+		else
+			go <= new_go;
+		end if;
+	end if;
+end process;
+
+go2: process(en_go,go) 	
+begin
+	if(en_go='1') then
+		new_go <= '1';
+	else
+		new_go <= go;
+	end if;
+end process;
+
 	pr_1: process (clk, reset)
 	begin
 		if (rising_edge(clk)) then
@@ -25,8 +47,10 @@ begin
 		  when start_state =>
         mux_sel     <= '0';
         st_go_sel   <= '0';
-
-        if (user = '1') then
+		  reset_go<='1';
+		  en_go<='0'
+		  
+        if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
         else
           next_state <= start_state;
@@ -34,7 +58,7 @@ begin
       when game_state =>
         mux_sel     <= '1';
         st_go_sel   <= '0';
-
+		  
         if (game_over = '1') then
           next_state <= game_over_state;
         else
@@ -45,7 +69,7 @@ begin
         mux_sel     <= '0';
         st_go_sel   <= '1';
 
-        if (user = '1') then
+        if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
         else
           next_state <= game_over_state;

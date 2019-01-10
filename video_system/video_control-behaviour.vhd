@@ -58,10 +58,10 @@ end process;
 --At pixel 0, the final four bits are loaded, at pixel 5 the first four bits are loaded. 
 --At pixel 8 the new colours are loaded into the buffer
 
-ib11: process(clk, reset)
+ib11: process(clk, reset,user_reset)
 begin
 	if(clk'event and clk = '1') then
-		if reset = '1' then
+		if reset = '1' or user_reset='1' then
 			state<= reset_state;
 		else
 			state<= new_state;

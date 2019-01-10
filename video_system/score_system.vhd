@@ -10,6 +10,7 @@ entity score_system is
 	dual_pixel_y				: in std_logic;
 	county				: in std_logic_vector(2 downto 0);
 	current_block_horizontal 				: in std_logic_vector(4 downto 0);
+	user_reset_scoresystem		:in std_logic;
 
 	rgb_score       				: out std_logic_vector(2 downto 0);
 

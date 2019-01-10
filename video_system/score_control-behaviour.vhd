@@ -79,10 +79,10 @@ begin
 end process;
 
 
-L3: process(clk, reset)
+L3: process(clk, reset,user_reset_score)
 begin
 	if(clk'event and clk = '1') then
-		if reset = '1' then
+		if reset = '1' or user_reset_score='1' then
 			state<= reset_state;
 		else
 			state<= new_state;

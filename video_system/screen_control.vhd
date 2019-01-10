@@ -7,6 +7,7 @@ entity screen_controller is
 		    reset		  : in std_logic;
         user      : in std_logic;
         game_over : in std_logic;
+		  calc_start_in : in std_logic;
         mux_sel   : out std_logic;
         st_go_sel : out std_logic
 	);

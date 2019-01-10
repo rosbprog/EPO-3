@@ -21,9 +21,10 @@ architecture structural of score_system is
    	   dual_pixel_y					: in std_logic;
    	   county					: in std_logic_vector(2 downto 0);
    	   current_block_horizontal 					: in std_logic_vector(4 downto 0);
+			user_reset_score			: in std_logic;
    
    	   colour					: out std_logic_vector(2 downto 0);
-           score_sprite_type   						: out std_logic_vector(3 downto 0);
+         score_sprite_type   						: out std_logic_vector(3 downto 0);
    	   score_y_pos	      				: out std_logic_vector(2 downto 0);
    	
    	   reset_dual_pixel_y					: out std_logic;
@@ -62,7 +63,7 @@ L1: score_sprite port map( score_y_pos, score_sprite_type, pixel_array);
 
 L2: score_count port map( clk, reset, score_plus, score_a, score_b, score_c);
 
-L3: score_control port map( clk, reset, score_sync_vga, score_a, score_b, score_c, pixel_array, dual_pixel_y, county, current_block_horizontal, rgb_score, score_sprite_type, score_y_pos, reset_dual_pixel_y, reset_current_block_horizontal, reset_county, en_county, en_current_block_horizontal, en_dual_pixel_y);
+L3: score_control port map( clk, reset, score_sync_vga, score_a, score_b, score_c, pixel_array, dual_pixel_y, county, current_block_horizontal, user_reset_scoresystem  ,rgb_score, score_sprite_type, score_y_pos, reset_dual_pixel_y, reset_current_block_horizontal, reset_county, en_county, en_current_block_horizontal, en_dual_pixel_y);
 
 end structural;
 
