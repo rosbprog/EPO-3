@@ -155,8 +155,8 @@ signal	pacman_pos_load, gr_pos_load	, gg_pos_load :  std_logic;
 signal	pacman_pos_reset, gr_pos_reset, gg_pos_reset	 :  std_logic;
 signal	shift_clock_reset, shift_clock_reset_gr,  shift_clock_reset_gg:  std_logic;
 
-signal cell_state_out_shift_pacman: std_logic_vector(5 downto 0);
-signal	cell_state_out_shift_gr, cell_state_out_shift_gg, cell_state_out_shift_internal: std_logic_vector(2 downto 0);
+signal cell_state_out_shift_pacman, cell_state_out_shift_internal: std_logic_vector(5 downto 0);
+signal	cell_state_out_shift_gr, cell_state_out_shift_gg: std_logic_vector(2 downto 0);
 signal  y_pos_out_shift_pacman, y_pos_out_shift_gr, y_pos_out_shift_gg, y_pos_out_shift_internal: std_logic_vector(2 downto 0);
 signal  pixel_arr_out_shift_pacman, pixel_arr_out_shift_gr, pixel_arr_out_shift_gg, pixel_arr_out_shift_internal: std_logic_vector(7 downto 0);
 
@@ -275,17 +275,17 @@ process(	y_pos_out_shift_pacman,
 
 begin
 
-if cell_state_out_shift_pacman = "001" then
+if cell_state_out_shift_pacman(2 downto 0) = "001" then
 	y_pos_out_shift_internal <= y_pos_out_shift_pacman;
 	cell_state_out_shift_internal <= cell_state_out_shift_pacman;
 	pixel_arr_out_shift_internal <= pixel_arr_out_shift_pacman;
 elsif cell_state_out_shift_gr = "010" then
 	y_pos_out_shift_internal <= y_pos_out_shift_gr;
-	cell_state_out_shift_internal <= cell_state_out_shift_gr;
+	cell_state_out_shift_internal <= "000" & cell_state_out_shift_gr;
 	pixel_arr_out_shift_internal <= pixel_arr_out_shift_gr;
 elsif cell_state_out_shift_gg = "011" then
 	y_pos_out_shift_internal <= y_pos_out_shift_gg;
-	cell_state_out_shift_internal <= cell_state_out_shift_gg;
+	cell_state_out_shift_internal <= "000" & cell_state_out_shift_gg;
 	pixel_arr_out_shift_internal <= pixel_arr_out_shift_gg;
 else
 	y_pos_out_shift_internal <= y_pos_out_shift_pacman;
