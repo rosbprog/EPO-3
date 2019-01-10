@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 architecture behavioural of screen_controller is
 
-type statetype is (start_state, game_state, game_over_state);
+type statetype is (start_state, game_state, pre_game_over_state, game_over_state);
 signal state,next_state : statetype;
 signal go, new_go, reset_go,en_go: std_logic;
 
@@ -43,31 +43,49 @@ end process;
 
 	pr_2: process(state, user, game_over) is
 	begin
-		case state is
-		  when start_state =>
+	case state is
+       when start_state =>
         mux_sel     <= '0';
         st_go_sel   <= '0';
-		  reset_go<='1';
-		  en_go<='0'
+        reset_go<='1';
+	en_go<='0'
 		  
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
         else
           next_state <= start_state;
         end if;
+		
       when game_state =>
         mux_sel     <= '1';
         st_go_sel   <= '0';
-		  
+	reset_go<='0';
+	
         if (game_over = '1') then
-          next_state <= game_over_state;
+          next_state <= pre_game_over_state;
+	  en_go<='1';
         else
           next_state <= game_state;
+	  en_go<='0';
         end if;
+		
+      when pre_game_over_state =>
+	mux_sel<= '0';
+        st_go_sel<= '0';
+	reset_go<='0';
+	en_go<='0';
 
+ 	if (go = '1' and calc_start_in='1') then
+          next_state <= game_over_state;
+        else
+          next_state <= pre_game_over_state;
+        end if;			
+	
       when game_over_state =>
         mux_sel     <= '0';
         st_go_sel   <= '1';
+	reset_go<='1';
+	en_go<='0';
 
         if (user = '1' and calc_start_in='1') then
           next_state <= game_state;
