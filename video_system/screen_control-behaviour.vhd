@@ -41,7 +41,7 @@ end process;
 		end if;
 	end process;
 
-	pr_2: process(state, user, game_over) is
+	pr_2: process(state, user, game_over,calc_start_in,go) is
 	begin
 	case state is
        when start_state =>
