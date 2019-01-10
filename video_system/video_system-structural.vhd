@@ -114,7 +114,7 @@ component shift_system is
 	
 	screen_sync	  : in std_logic;
 
-	cell_state_out_shift: out std_logic_vector(2 downto 0);
+	cell_state_out_shift: out std_logic_vector(5 downto 0);
         y_pos_out_shift     : out std_logic_vector(2 downto 0);
         pixel_arr_out_shift : out std_logic_vector(7 downto 0)
 
@@ -123,8 +123,9 @@ component shift_system is
 end component;
 
 signal cell_type_test: std_logic_vector(2 downto 0);
+signal sprite_type_to_shift: std_logic_vector(5 downto 0);
 
-signal  y_pos_to_shift, y_pos_shifted, sprite_type_to_shift, sprite_type_to_register, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
+signal  y_pos_to_shift, y_pos_shifted, colour, rgb_score, rgb_video, sprite_colour: std_logic_vector(2 downto 0);
 signal  sync, score_sync, calc_start_internal: std_logic;
 signal  pixel_array_to_shift, pixel_array_shifted: std_logic_vector(7 downto 0);
 signal	county:  std_logic_vector(2 downto 0);
