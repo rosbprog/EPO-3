@@ -23,25 +23,25 @@ end process;
 
 process(count)
 begin
-  if(count > "0101000") then
+  if(count > "0010100") then -- this is now 20
     forty <= '1';
   else
     forty <= '0';
   end if;
 
-  if(count > "0111100") then
+  if(count > "0011110") then -- this is now 30
     sixty <= '1';
   else
     sixty <= '0';
   end if;
 
-  if(count > "1010000") then
+  if(count > "0101000") then -- this is now 40
     eighty <= '1';
   else
     eighty <= '0';
   end if;
 
-  if(count > "1111000") then
+  if(count > "0111100") then -- this is now 60
     hundredandtwenty <= '1';
   else
     hundredandtwenty <= '0';
