@@ -73,7 +73,7 @@ end process;
         end if;
 		
       when pre_game_over_state =>
-	mux_sel<= '0';
+	mux_sel<= '1';
         st_go_sel<= '0';
 	reset_go<='0';
 	en_go<='0';
