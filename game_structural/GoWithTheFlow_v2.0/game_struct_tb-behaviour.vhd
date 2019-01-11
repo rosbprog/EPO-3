@@ -54,17 +54,16 @@ begin
 			'0' after 140 ns;
 	
 	-- "0001" is right, "0010" is up, "0100" is left, "1000" is down.
-	dir_pacman <=	"0000" after 0 ns, "0001" after 100 ns;
-	dir_ghost1 <=	"0000" after 0 ns, "1000" after 100 ns;
-	dir_ghost2 <=	"0000" after 0 ns, "1000" after 100 ns;
+	dir_pacman <=	"0000" after 0 ns, "0010" after 3000 ns;
+	dir_ghost1 <=	"0000" after 0 ns;
+	dir_ghost2 <=	"0000" after 0 ns;
 
 	vc_done_in <=	'0' after 0 ns,
 			'1' after 100 ns when vc_done_in /= '1' else '0' after 100 ns;
 
-	row_request <=	"10010" after 0 ns;	-- row 18, Pac-Man row
+	-- we see: pacman.
+	row_request <=	"10010" after 0 ns; 
 
-	col_request <=	"00000" after 0 ns,	-- column 0
-			"01011" after 10 ns,
-			"01100" after 20 ns;
+	col_request <=	"01011" after 0 ns;
 
 end architecture structural;

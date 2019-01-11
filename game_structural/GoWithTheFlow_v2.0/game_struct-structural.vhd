@@ -178,7 +178,8 @@ L3c: pacman_system port map (clk, pacman_reset, row_old_pacman, col_old_pacman, 
 
 L4a: map_register port map (row_map, col_map, pos_is_wall);
 L4b: coordinate_multiplexer port map (pacman_map_select, row_new_ghost1, col_new_ghost1, row_new_pacman, col_new_pacman, row_int_a_to_b, col_int_a_to_b);
-L4c: coordinate_multiplexer port map (ghost1_map_select, row_new_ghost2, col_new_ghost2, row_int_a_to_b, col_int_a_to_b, row_int_b_to_c, col_int_b_to_c);
+--L4c: coordinate_multiplexer port map (ghost1_map_select, row_new_ghost2, col_new_ghost2, row_int_a_to_b, col_int_a_to_b, row_int_b_to_c, col_int_b_to_c);
+L4c: coordinate_multiplexer port map (ghost1_map_select, row_int_a_to_b, col_int_a_to_b, row_new_ghost2, col_new_ghost2, row_int_b_to_c, col_int_b_to_c);
 L4d: coordinate_multiplexer port map (vc_has_priority, row_int_b_to_c, col_int_b_to_c, row_request_int, col_request_int, row_map, col_map);
 
 L5: reset_controller port map (reset_int, zero_coins, coin_register_reset, score_reset, pacman_reset, ghost1_reset, ghost2_reset);

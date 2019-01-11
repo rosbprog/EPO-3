@@ -29,7 +29,7 @@ begin
     forty <= '0';
   end if;
 
-  if(count > "0011110") then -- this is now 30
+  if(count > "0100000") then -- this is now 32
     sixty <= '1';
   else
     sixty <= '0';
