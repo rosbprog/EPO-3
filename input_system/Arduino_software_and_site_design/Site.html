@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.btn-group .button {
+  display: inline-block;
+  padding: 30px 30px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  display: block;
+}
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+ul {
+  list-style-type: none;
+  margin: 0; 
+  padding: 0; 
+  overflow: hidden;
+  background-color: #333;
+   position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #0066FF;
+}
+.active1 {
+  background-color: #FFF000;
+  color: black;
+}
+.active2 {
+  background-color: #66FF33;
+  color: black;
+}
+.active3 {
+  background-color: #FF3300;
+  color: black;
+}
+</style>
+</head>
+<body>
+<ul>
+  <li><a class="active1" href="#P">Pac-Man</a></li>
+  <li><a class="active2" href="#G1">Green Ghost</a></li>
+  <li><a class="active3" href="#G2">Red Ghost</a></li>
+</ul>
+
+<br><br><br>
+<h2 id="P">Pac-Man</h2>
+<div class="btn-group">
+<br><input class="button" name="bp2" value= "Up" onclick="location.href='/Up'">
+<br><input class="button" name="bp1" value="Start" onclick="location.href='/Start'">
+<br><input class="button" name="bp3" value="Down" onclick="location.href='/Down'">
+<br><input class="button" name="bp4" value="Left" onclick="location.href='/Left'">
+<br><input class="button" name="bp5" value="Right" onclick="location.href='/Right'">
+<br><br><br>
+</div>
+
+<br><br><br>
+<div class="btn-group">
+<h2 id="G1">Green Ghost</h2>
+<br><input class="button" name="bp6" value= "Up" onclick="location.href='/G1Up'">
+<br><br><br>
+<br><input class="button" name="bp7" value="Down" onclick="location.href='/G1Down'">
+<br><br><br>
+<br><input class="button" name="bp8" value="Left" onclick="location.href='/G1Left'">
+<br><br><br>
+<br><input class="button" name="bp9" value="Right" onclick="location.href='/G1Right'">
+<br><br><br>
+</div>
+
+<br><br><br>
+<div class="btn-group">
+<h2 id="G2">Red Ghost</h2>
+<br><input class="button" name="bp10" value= "Up" onclick="location.href='/G2Up'">
+<br><br><br>
+<br><input class="button" name="bp11" value="Down" onclick="location.href='/G2Down'">
+<br><br><br>
+<br><input class="button" name="bp12" value="Left" onclick="location.href='/G2Left'">
+<br><br><br>
+<br><input class="button" name="bp13" value="Right" onclick="location.href='/G2Right'">
+<br><br><br>
+</div>
+</body>
+</html>
