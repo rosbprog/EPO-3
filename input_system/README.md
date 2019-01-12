@@ -20,14 +20,14 @@ On the NodeMcu ESP8266 [the "arduino"] the input vector is defined as follows:
   - Ghost2:  "D8-D7-D6"
 
 The inputs of the structural are:
- - clk         (1 bit vector)
- - reset       (1 bit vector)
+ - clk         (1 bit)
+ - reset       (1 bit)
  - dir_pacman  (3 bit vector)
  - dir_ghost1  (3 bit vector)
  - dir_ghost2  (3 bit vector)
 
 The outputs then are
- - start       (1 bit vector) 
+ - start       (1 bit) 
  - dir_out_p1  (4 bit vector) 
  - dir_out_p2  (4 bit vector)
  - dir_out_p3  (4 bit vector)
