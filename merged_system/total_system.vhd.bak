@@ -6,10 +6,7 @@ entity total_system is
 port(
 	clk : in std_logic;
 	reset: in std_logic;
-	dir_pacman: in std_logic_vector(3 downto 0);
-	dir_ghost1: in std_logic_vector(3 downto 0);
-	dir_ghost2: in std_logic_vector(3 downto 0);
-	user_begin: in std_logic;
+	pacman: in std_logic_vector(3 downto 0);
 	red: out std_logic;
 	green: out std_logic;
 	blue: out std_logic; 
