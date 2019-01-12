@@ -67,17 +67,6 @@ void loop()
       digitalWrite(Pac_led_1, HIGH);          //Start: 111
       digitalWrite(Pac_led_0, HIGH);          //Right: 001, Up: 010, Left: 011, Down: 100 
     }
-    else if (request.indexOf("/Reset") != -1){ 
-      digitalWrite(Pac_led_2, LOW); 
-      digitalWrite(Pac_led_1, LOW);
-      digitalWrite(Pac_led_0, LOW);
-      digitalWrite(Ghost1_led_2, LOW); 
-      digitalWrite(Ghost1_led_1, LOW);
-      digitalWrite(Ghost1_led_0, LOW);
-      digitalWrite(Ghost2_led_2, LOW); 
-      digitalWrite(Ghost2_led_1, LOW);
-      digitalWrite(Ghost2_led_0, LOW);
-    }
     else if (request.indexOf("/Right") != -1){ 
       digitalWrite(Pac_led_2, LOW); 
       digitalWrite(Pac_led_1, LOW);
