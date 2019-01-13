@@ -1,9 +1,10 @@
 # input_system
 NEW:
-The folder "input system" contains the input system consisting of the following parts:
+The folder "input system arduino 02" contains the input system consisting of the following parts:
   - Input buffer
   - Input FSM
-  - a structural
+  - a structural for input system ghost
+  - a structural for input system pacman
   
 It works by taking in a 3-bit direction input for each player and spits out a 4-bit direction output for each player. It also spits out a Start signal. 
 
