@@ -32,8 +32,7 @@ component coordinate_register is
 port (
 		clk			: in	std_logic;
 		reset			: in	std_logic;	
-		row_number_reset	: in	std_logic_vector(4 downto 0);	
-		column_number_reset	: in	std_logic_vector(4 downto 0);	
+		row_number_reset	: in	std_logic_vector(4 downto 0);	1		column_number_reset	: in	std_logic_vector(4 downto 0);	
 		row_number_in		: in	std_logic_vector(4 downto 0);	
 		column_number_in	: in	std_logic_vector(4 downto 0);	
 		row_number_out		: out	std_logic_vector(4 downto 0);
@@ -80,7 +79,7 @@ select_freeze <= mux_select and (not(ghost_freeze));
 
 --L0: input_buffer port map (clk, reset, ghost_input, data_buffed);
 --L1: input_controller port map (clk, reset, data_buffed, move);
-L5: input_system_ghost port map (clk, reset, start, ghost_input, move);
+L1: input_system_ghost port map (clk, reset, start, ghost_input, move);
 L2: coordinate_adder port map (int_old_row, int_old_col, move, int_new_row, int_new_col);
 L3: coordinate_multiplexer port map (select_freeze, int_old_row, int_old_col, int_new_row, int_new_col, row_muxxed, col_muxxed);
 L4: coordinate_register port map (clk, reset, row_reset, col_reset, row_muxxed, col_muxxed, int_old_row, int_old_col);
