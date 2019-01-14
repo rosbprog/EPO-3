@@ -28,32 +28,32 @@ begin
 					wall_present	=> wall_present
 				);
 
-	column_select <=	"00000" after 5 ns,
-				"00001" after 25 ns,
-				"00010" after 45 ns,
-				"00011" after 65 ns,
-				"00100" after 85 ns,
-				"00101" after 105 ns,
-				"00110" after 125 ns,
-				"00111" after 145 ns,
-				"01000" after 165 ns,
-				"01001" after 185 ns,
-				"01010" after 205 ns,
-				"01011" after 225 ns,
-				"01100" after 245 ns,
-				"01101" after 265 ns,
-				"01110" after 285 ns,
-				"01111" after 305 ns,
-				"10000" after 325 ns,
-				"10001" after 345 ns,
-				"10010" after 365 ns,
-				"10011" after 385 ns,
-				"10100" after 405 ns,
-				"10101" after 425 ns,
-				"10110" after 445 ns,
-				"10111" after 465 ns,
-				"11000" after 485 ns;
+	column_select <=	"00000" after 0 ns,	-- column 0
+				"00001" after 10 ns,	-- column 1
+				"00010" after 20 ns,	-- column 2
+				"00011" after 30 ns,	-- column 3
+				"00100" after 40 ns,	-- column 4
+				"00101" after 50 ns,	-- column 5
+				"00110" after 60 ns,	-- column 6
+				"00111" after 70 ns,	-- column 7
+				"01000" after 80 ns,	-- column 8
+				"01001" after 90 ns,	-- column 9
+				"01010" after 100 ns,	-- column 10
+				"01011" after 110 ns,	-- column 11
+				"01100" after 120 ns,	-- column 12
+				"01101" after 130 ns,	-- column 13
+				"01110" after 140 ns,	-- column 14
+				"01111" after 150 ns,	-- column 15
+				"10000" after 160 ns,	-- column 16
+				"10001" after 170 ns,	-- column 17
+				"10010" after 180 ns,	-- column 18
+				"10011" after 190 ns,	-- column 19
+				"10100" after 200 ns,	-- column 20
+				"10101" after 210 ns,	-- column 21
+				"10110" after 220 ns,	-- column 22
+				"10111" after 230 ns,	-- column 23
+				"11000" after 240 ns;	-- column 24
 
-	row_select <= std_logic_vector(to_unsigned(13, row_select'length));
+	row_select <= std_logic_vector(to_unsigned(14, row_select'length));
 
 end architecture structural;

@@ -1,0 +1,73 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_unsigned.all;
+
+entity power_counter is
+	port(	clk		: in	std_logic;
+		reset	: in 	std_logic; 
+		vc_done		: in	std_logic;
+		use_power		: in std_logic;
+		ghost_freeze		: out	std_logic);
+end entity power_counter;
+
+architecture behaviour of power_counter is
+
+type power_state is (reset_state, wait_state, count_state, done_state);
+signal state, new_state : power_state;
+signal count, new_count : std_logic_vector (8 downto 0);
+
+begin
+
+process(clk)
+begin
+  if(rising_edge(clk)) then
+    if(reset = '1') then
+      state <= reset_state;
+      count <= "000000000";
+    else
+      state <= new_state;
+      count <= new_count;
+    end if;
+  end if;
+end process;
+
+process(state, vc_done, use_power, count)
+begin
+
+  case state is
+	when reset_state =>
+	  ghost_freeze <= '0';
+	  new_count <= "000000000";
+	  new_state <= wait_state;
+
+	when wait_state =>
+	  ghost_freeze <= '0';
+	  new_count <= "000000000";
+	  if(use_power = '1') then
+	    new_state <= count_state;
+	  else
+	    new_state <= wait_state;
+	  end if;
+
+	when count_state =>
+	  ghost_freeze <= '1';
+	  if(vc_done = '1') then
+	    new_count <= count + 1;
+          else
+	    new_count <= count;
+          end if;
+	  if(count > "100101100") then -- 300, i.e. 5 seconds
+	    new_state <= done_state;
+	  else
+	    new_state <= count_state;
+	  end if;
+
+	when done_state =>
+	  ghost_freeze <= '0';
+	  new_count <= "000000000";
+	  new_state <= wait_state;
+  end case;
+end process;
+
+end architecture;
+
