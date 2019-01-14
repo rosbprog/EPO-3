@@ -76,6 +76,7 @@ signal data_buffed, move : std_logic_vector(3 downto 0);
 signal mux_select : std_logic;
 signal row_muxxed, col_muxxed : std_logic_vector(4 downto 0);
 signal int_old_row, int_old_col, int_new_row, int_new_col : std_logic_vector (4 downto 0);
+signal select_freeze : std_logic;
 
 begin
 
@@ -83,12 +84,14 @@ row_old <= int_old_row;
 col_old <= int_old_col;
 row_new <= int_new_row;
 col_new <= int_new_col;
+select_freeze <= mux_select and (not(ghost_freeze));
 
 L0: input_buffer port map (clk, reset, ghost_input, data_buffed);
 L1: input_controller port map (clk, reset, data_buffed, move);
 L2: coordinate_adder port map (int_old_row, int_old_col, move, int_new_row, int_new_col);
-L3: coordinate_multiplexer port map (mux_select, int_old_row, int_old_col, int_new_row, int_new_col, row_muxxed, col_muxxed);
+L3: coordinate_multiplexer port map (select_freeze, int_old_row, int_old_col, int_new_row, int_new_col, row_muxxed, col_muxxed);
 L4: coordinate_register port map (clk, reset, row_reset, col_reset, row_muxxed, col_muxxed, int_old_row, int_old_col);
 L5: ghost_cont port map (clk, reset, ghost_start, pos_is_wall, mux_select, ghost_ready, en_wall);
 
 end structural;
+
