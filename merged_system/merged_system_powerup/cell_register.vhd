@@ -5,6 +5,7 @@ use IEEE.std_logic_1164.all;
 entity cell_register is
 	port (
 		coin_present		: in std_logic;				-- Input signal, when '1', a coin is present in the requested cell
+		power_present : in std_logic;
 		wall_present		: in std_logic;				-- Input signal, when '1', a wall is present in the requested cell
 		vc_done_in		: in std_logic;				-- Input signal, when '1', the video controller gives control back
 										--	to the other components to access the registers
@@ -49,3 +50,4 @@ entity cell_register is
 		is_game_over_out	: out std_logic				-- Output signal, when '1', the game is over
 	);
 end entity cell_register;
+
