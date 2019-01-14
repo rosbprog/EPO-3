@@ -9,6 +9,7 @@ entity pacman_cont is
         reset       : in  std_logic;
         p_ready     : out std_logic;
         write_coin  : out std_logic;
+	write_power : out std_logic;
         en_wall     : out std_logic;
         rip         : out std_logic;
         en_cor      : out std_logic);
