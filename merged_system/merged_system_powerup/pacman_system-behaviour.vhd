@@ -9,6 +9,7 @@ architecture structural of pacman_system is
 		        reset       : in  std_logic;
 		        p_ready     : out std_logic;
 		        write_coin  : out std_logic;
+			write_power : out std_logic;
 		        en_wall     : out std_logic;
 		        rip         : out std_logic;
 		        en_cor      : out std_logic
@@ -94,6 +95,7 @@ begin
 						sadness		=> ghost_present,
 						p_ready		=> ready,
 						write_coin	=> write_coin,
+						write_power => write_power,
 						en_wall		=> en_wall,
 						rip		=> rip,
 						en_cor		=> en_new_coord
