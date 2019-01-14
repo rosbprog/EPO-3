@@ -26,6 +26,7 @@ begin
 			when reset_state =>
 			p_ready <= '0';
 			write_coin <= '0';
+			write_power <= '0';
 			en_wall <= '0';
 			rip <= '0';
 			en_cor <= '0';
@@ -38,6 +39,7 @@ begin
 			when start_state =>
 			p_ready <= '0';
 			write_coin <= '0';
+			write_power <= '0';
 			en_wall <= '1';
 			rip <= '0';
 			en_cor <= '0';
@@ -54,6 +56,7 @@ begin
 			when rip_state =>
 			p_ready <= '1';
 			write_coin <= '0';
+			write_power <= '0';
 			en_wall <= '0';
 			rip <= '1';
 			en_cor <= '0';
@@ -62,6 +65,7 @@ begin
 			when wall_state =>
 			p_ready <= '1';
 			write_coin <= '0';
+			write_power <= '0';
 			en_wall <= '0';
 			rip <= '0';
 			en_cor <= '0';
@@ -70,6 +74,7 @@ begin
 			when move_state =>
 			p_ready <= '1';
 			write_coin <= '1';
+			write_power <= '1';
 			en_wall <= '0';
 			rip <= '0';
 			en_cor <= '1';
@@ -82,3 +87,4 @@ begin
 
 
 end behaviour;
+
