@@ -1,0 +1,40 @@
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+
+entity power_system is
+  port( clk, reset, vc_done, write_power : in std_logic;
+	row, column : in std_logic_vector (4 downto 0);
+	power_present, ghost_freeze : out std_logic);
+end power_system;
+
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+
+architecture structural of power_system is
+  
+  component power_register is
+  port(clk          : in  std_logic;
+        reset        : in  std_logic;
+	write_power  : in  std_logic;
+        row          : in  std_logic_vector(4 downto 0);
+        column       : in  std_logic_vector(4 downto 0);
+        power_present : out std_logic;
+	use_power    : out std_logic);
+  end component;
+
+  component power_counter is
+  port(	clk		: in	std_logic;
+		reset	: in 	std_logic; 
+		vc_done		: in	std_logic;
+		use_power		: in std_logic;
+		ghost_freeze		: out	std_logic);
+  end component;
+
+signal use_power : std_logic;
+
+begin
+
+lbl1: power_register port map (clk, reset, write_power, row, column, power_present, use_power);
+lbl2: power_counter port map (clk, reset, vc_done, use_power, ghost_freeze);
+
+end structural;
