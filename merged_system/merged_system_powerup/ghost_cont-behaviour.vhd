@@ -25,7 +25,7 @@ begin
 			when reset_state => --this states waites till vga is ready
 			en_cor_ghost <=  '0';
 			ghost_ready <=  '0';
-			en_wall <=  '1';	
+			en_wall <=  '0';	
 				if (ghost_start = '1') then 
 					new_state <= start_state;
 				else

@@ -1,0 +1,52 @@
+architecture structural of speedcontroller is
+	component fsm_counter is
+		port (	clk			: in	std_logic; --12.5 MHz clock signal
+		reset			: in	std_logic; --System reset
+		
+		p_rdy			: in 	std_logic;
+		g1_rdy			: in 	std_logic;
+		coin_rst		: in 	std_logic; --reset when all coins picked up
+		forty			: in 	std_logic;
+		sixty			: in 	std_logic;
+		eighty			: in	std_logic;
+		hundredandtwenty			: in	std_logic;
+
+		p_strt			: out 	std_logic;
+		g1_strt			: out 	std_logic;
+		g2_strt			: out 	std_logic;
+		c_rst			: out	std_logic); --counter reset
+	end component fsm_counter;
+
+	component new_counter is
+	port(	clk		: in	std_logic;
+		count_reset	: in 	std_logic; 
+		vc_done		: in	std_logic;
+		forty		: out	std_logic;
+		sixty		: out	std_logic;
+		eighty		: out	std_logic;
+		hundredandtwenty		: out	std_logic);
+	end component;
+	
+ signal forty, sixty, eighty, hundredandtwenty, c_rst_int : std_logic;
+	
+begin
+LBL1: fsm_counter	port map(		
+				clk 	=> clk,
+				reset 	=> reset,
+				p_rdy 	=> p_rdy,
+				g1_rdy	=> g_rdy,
+				coin_rst=> coin_rst,
+				forty => forty,
+				sixty => sixty,
+				eighty => eighty,
+				hundredandtwenty => hundredandtwenty,
+
+				p_strt	=> p_strt,
+				g1_strt	=> g1_strt,
+				g2_strt	=> g2_strt,
+				c_rst	=> c_rst_int		
+			);
+
+LBL2: new_counter port map(clk, c_rst_int, vc_done, forty, sixty, eighty, hundredandtwenty);
+
+end architecture structural;
