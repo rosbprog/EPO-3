@@ -15,4 +15,3 @@ entity game_struct is
 	game_over_out : out std_logic;
         cell_type    : out std_logic_vector(2 downto 0));
 end game_struct;
-
