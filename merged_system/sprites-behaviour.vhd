@@ -162,7 +162,20 @@ mouth <= sprite_select(5);
 					else
 						row_out <= "00000000";
 					end if;
-
+				elsif(sprite_type = "100") then
+					color_out <= "011";
+					if(y_pos = "001") then
+						row_out <= "00101000";
+					elsif(y_pos = "010" OR y_pos = "100") then
+						row_out <= "01101000";
+					elsif(y_pos = "011" OR y_pos = "101") then
+						row_out <= "00010110";
+					elsif(y_pos = "110") then
+						row_out <= "00010100";
+					else
+						row_out <= "00000000";
+					end if;
+				
 				elsif(sprite_type = "101") then
 					color_out <= "111";
 					if(y_pos = "010" OR y_pos = "101") then
