@@ -25,6 +25,8 @@ entity pacman_system is
 		rip			: out	std_logic;
 		ready			: out	std_logic;
 		write_coin		: out	std_logic;
+		write_power : out std_logic;
 		en_wall			: out	std_logic
 	);
 end entity pacman_system;
+
