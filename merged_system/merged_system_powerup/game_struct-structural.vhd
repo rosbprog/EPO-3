@@ -4,7 +4,8 @@ use IEEE.std_logic_1164.ALL;
 architecture structural of game_struct is
 
   component cell_register is
-  port (		coin_present		: in std_logic;				
+  port (		coin_present		: in std_logic;			
+		power_present		: in std_logic;			
 		wall_present		: in std_logic;				
 		vc_done_in		: in std_logic;				
 		score_pulse_in		: in std_logic;				
@@ -63,6 +64,7 @@ architecture structural of game_struct is
   port(clk         : in  std_logic;
         reset       : in  std_logic;
         pos_is_wall : in  std_logic;
+	ghost_freeze : in std_logic;
         ghost_start : in  std_logic;
         ghost_input : in  std_logic_vector(3 downto 0);
         row_old     : out std_logic_vector(4 downto 0);
@@ -97,6 +99,7 @@ architecture structural of game_struct is
 		rip			: out	std_logic;
 		ready			: out	std_logic;
 		write_coin		: out	std_logic;
+		write_power : out std_logic;
 		en_wall			: out	std_logic);
   end component;
 
@@ -129,6 +132,12 @@ architecture structural of game_struct is
 		pulse		: out std_logic);
   end component;
 
+  component power_system is 
+  port( clk, reset, vc_done, write_power : in std_logic;
+	row, column : in std_logic_vector (4 downto 0);
+	power_present, ghost_freeze : out std_logic);
+  end component;
+
   -- The following signals do not need to be declared (as they are part of the game_struct entity):
   -- clk, reset, vc_done_in, score_pulse, score_reset : std_logic;
   -- dir_pacman, dir_ghost1, dir_ghost2 : std_logic_vector (3 downto 0);
@@ -154,6 +163,9 @@ architecture structural of game_struct is
   signal wall_present, score_reset, vc_done, ghost1_reset, ghost1_start, ghost1_ready, ghost2_reset, ghost2_start, ghost2_ready, ghost2_map_select, pacman_start, game_over, pacman_ready, pacman_reset, vc_done_pulse : std_logic;
   signal vc_pulse : std_logic;
 
+  signal ghost_freeze, write_power, power_present : std_logic;
+  signal row_power, column_power : std_logic_vector (4 downto 0);
+
 begin
 
 Label_row_reset_p:        row_reset_pacman  <= "10010";
@@ -165,20 +177,19 @@ Label_col_reset_g2:        col_reset_ghost2  <= "01100";
 
 Label_reset:        reset_int <= reset or pacman_dead;
 
-L0: cell_register port map (coin_present, pos_is_wall, vc_done_in, score_add, score_reset, game_over, row_old_pacman, col_old_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, row_request, col_request, row_request_int, col_request_int, cell_type, vc_done, vc_has_priority, score_pulse, score_reset_out, game_over_out);
+L0: cell_register port map (coin_present, power_present, pos_is_wall, vc_done_in, score_add, score_reset, game_over, row_old_pacman, col_old_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, row_request, col_request, row_request_int, col_request_int, cell_type, vc_done, vc_has_priority, score_pulse, score_reset_out, game_over_out);
 
 L1a: coin_register port map (clk, coin_register_reset, write_coin, row_coin, col_coin, coin_present, score_add, zero_coins);
 L1b: coordinate_multiplexer port map (vc_has_priority, row_new_pacman, col_new_pacman, row_request_int, col_request_int, row_coin, col_coin);
 
 L2: deathcontroller port map (row_old_pacman, col_old_pacman, row_old_ghost1, col_old_ghost1, row_old_ghost2, col_old_ghost2, pacman_dead);
 
-L3a: ghost_struct port map (clk, ghost1_reset, pos_is_wall, ghost1_start, dir_ghost1, row_old_ghost1, col_old_ghost1, row_new_ghost1, col_new_ghost1, row_reset_ghost1, col_reset_ghost1, ghost1_map_select, ghost1_ready);
-L3b: ghost_struct port map (clk, ghost2_reset, pos_is_wall, ghost2_start, dir_ghost2, row_old_ghost2, col_old_ghost2, row_new_ghost2, col_new_ghost2, row_reset_ghost2, col_reset_ghost2, ghost2_map_select, ghost2_ready);
-L3c: pacman_system port map (clk, pacman_reset, row_old_pacman, col_old_pacman, row_new_pacman, col_new_pacman, row_reset_pacman, col_reset_pacman, dir_pacman, pacman_start, pos_is_wall, pacman_dead, game_over, pacman_ready, write_coin, pacman_map_select);
+L3a: ghost_struct port map (clk, ghost1_reset, pos_is_wall, ghost_freeze, ghost1_start, dir_ghost1, row_old_ghost1, col_old_ghost1, row_new_ghost1, col_new_ghost1, row_reset_ghost1, col_reset_ghost1, ghost1_map_select, ghost1_ready);
+L3b: ghost_struct port map (clk, ghost2_reset, pos_is_wall, ghost_freeze, ghost2_start, dir_ghost2, row_old_ghost2, col_old_ghost2, row_new_ghost2, col_new_ghost2, row_reset_ghost2, col_reset_ghost2, ghost2_map_select, ghost2_ready);
+L3c: pacman_system port map (clk, pacman_reset, row_old_pacman, col_old_pacman, row_new_pacman, col_new_pacman, row_reset_pacman, col_reset_pacman, dir_pacman, pacman_start, pos_is_wall, pacman_dead, game_over, pacman_ready, write_coin, write_power, pacman_map_select);
 
 L4a: map_register port map (row_map, col_map, pos_is_wall);
 L4b: coordinate_multiplexer port map (pacman_map_select, row_new_ghost1, col_new_ghost1, row_new_pacman, col_new_pacman, row_int_a_to_b, col_int_a_to_b);
---L4c: coordinate_multiplexer port map (ghost1_map_select, row_new_ghost2, col_new_ghost2, row_int_a_to_b, col_int_a_to_b, row_int_b_to_c, col_int_b_to_c);
 L4c: coordinate_multiplexer port map (ghost2_map_select, row_int_a_to_b, col_int_a_to_b, row_new_ghost2, col_new_ghost2, row_int_b_to_c, col_int_b_to_c);
 L4d: coordinate_multiplexer port map (vc_has_priority, row_int_b_to_c, col_int_b_to_c, row_request_int, col_request_int, row_map, col_map);
 
@@ -186,5 +197,10 @@ L5: reset_controller port map (reset_int, zero_coins, coin_register_reset, score
 
 L6a: speedcontroller port map (clk, reset, pacman_ready, ghost1_ready, coin_register_reset, vc_pulse, pacman_start, ghost1_start, ghost2_start);
 L6b: pulse_generator port map (clk, reset, vc_done, vc_pulse);
+
+L7a: power_system port map (clk, reset, vc_pulse, write_power, row_power, column_power, power_present, ghost_freeze); -- change reset to coin_register_reset for different operating
+L7b: coordinate_multiplexer port map (vc_has_priority, row_new_pacman, col_new_pacman, row_request_int, col_request_int, row_power, column_power);
 end structural;
+
+
 
