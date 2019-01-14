@@ -5,6 +5,7 @@ entity ghost_struct is
    port(clk         : in  std_logic;
         reset       : in  std_logic;
         pos_is_wall : in  std_logic;
+	ghost_freeze : in std_logic;
         ghost_start : in  std_logic;
         ghost_input : in  std_logic_vector(3 downto 0);
         row_old     : out std_logic_vector(4 downto 0);
