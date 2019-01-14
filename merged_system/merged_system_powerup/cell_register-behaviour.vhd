@@ -40,6 +40,8 @@ begin
 		elsif coin_present = '1' then
 			cell_type <= "101";	-- If the cell contains a coin
 
+		elsif power_present = '1' then
+			cell_type <= "100";
 		else
 			cell_type <= "000";	-- If the cell is empty
 		end if;
