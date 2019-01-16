@@ -35,7 +35,7 @@ entity cell_register is
 										--	"001"	= pacman cell
 										--	"010"	= ghost1 cell
 										--	"011"	= ghost2 cell
-										--	"100"	= empty cell
+										--	"100"	= power cell
 										--	"101"	= coin cell
 										--	"110"	= wall cell
 										--	"111"	= empty cell
